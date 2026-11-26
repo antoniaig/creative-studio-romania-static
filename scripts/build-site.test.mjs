@@ -44,6 +44,9 @@ test("builds a self-contained static site with every current route", async () =>
     const home = await readFile(path.join(projectRoot, "dist/index.html"), "utf8");
     assert.match(home, /aria-label="Homepage sections"/);
     assert.match(home, /id="video-dialog"/);
+    assert.match(home, /rel="preload" as="image" href="\.\/images\/brand\/home\/lion\.jpg" fetchpriority="high"/);
+    assert.match(home, /VIEW ALL STORIES <span aria-hidden="true">→<\/span>/);
+    assert.match(home, /VIEW ALL COLLECTIONS <span aria-hidden="true">→<\/span>/);
 
     const search = await readFile(path.join(projectRoot, "dist/search/index.html"), "utf8");
     assert.match(search, /data-search-results/);

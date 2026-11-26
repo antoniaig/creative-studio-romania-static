@@ -212,6 +212,9 @@ function footer(prefix) {
 
 function page({ title, description, body, depth = 0, isHome = false, includeSearchData = false }) {
     const root = rootPrefix(depth);
+    const homePreload = isHome
+        ? `<link rel="preload" as="image" href="${root}images/brand/home/lion.jpg" fetchpriority="high"/>`
+        : "";
     const dataScript = includeSearchData
         ? `<script>window.STUDIO_ITEMS=${JSON.stringify(allItems).replaceAll("<", "\\u003c")};</script>`
         : "";
@@ -226,6 +229,7 @@ function page({ title, description, body, depth = 0, isHome = false, includeSear
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;family=Playfair+Display:ital@1&amp;display=swap"/>
+    ${homePreload}
     <link rel="stylesheet" href="${root}css/studio.css"/>
 </head>
 <body data-root-prefix="${root}">
@@ -300,7 +304,7 @@ function detailPage(item, group) {
         <div class="section-heading">
             <div><p class="eyebrow eyebrow--dark">${group === "photography" ? "PHOTOGRAPHY CHAPTERS" : "THE COLLECTIONS"}</p>
                 <h2>More from <em>${escapeHtml(parentLabel)}.</em></h2></div>
-            <a class="text-link" href="${root}${parentPath}">VIEW ALL <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="${root}${parentPath}">VIEW ALL <span aria-hidden="true">→</span></a>
         </div>
         <div class="chapter-grid">${siblings.map((related) => chapterTile(related, root)).join("\n            ")}</div>
     </section>
@@ -361,14 +365,14 @@ function homePage() {
     <section class="chapters content-section" id="photography-chapters">
         <div class="section-heading">
             <div><p class="eyebrow eyebrow--dark">PHOTO BY M · PHOTOGRAPHY &amp; FILMS</p><h2>Stories in <em>chapters.</em></h2></div>
-            <a class="text-link" href="${root}photography/">VIEW ALL STORIES <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="${root}photography/">VIEW ALL STORIES <span aria-hidden="true">→</span></a>
         </div>
         <div class="chapter-grid">${photographyChapters.map((item) => chapterTile({ ...item, path: `photography/${item.slug}/` }, root)).join("\n            ")}</div>
     </section>
     <section class="collections content-section" id="creation-collections">
         <div class="section-heading">
             <div><p class="eyebrow eyebrow--dark">THE CREATIONS BY G · MADE WITH HEART</p><h2>Objects with <em>meaning.</em></h2></div>
-            <a class="text-link" href="${root}creations/">VIEW ALL COLLECTIONS <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="${root}creations/">VIEW ALL COLLECTIONS <span aria-hidden="true">→</span></a>
         </div>
         <div class="chapter-grid">${creationCollections.map((item) => chapterTile({ ...item, path: `creations/${item.slug}/` }, root)).join("\n            ")}</div>
     </section>
