@@ -213,6 +213,7 @@ img { display: block; max-width: 100%; }
     .hero-preview { position: relative; top: auto; right: auto; align-self: center; width: clamp(190px, 60vw, 260px); }
     .worlds { grid-template-columns: 1fr; margin-top: -100px; }
     .world-panel { min-height: 230px; padding: 24px; }
+    .world-panel__signature--creations img { transform: translateY(-4px); }
     .world-panel__title { font-size: 30px; }
     .chapter-grid, .listing-grid { grid-template-columns: repeat(2, 1fr); }
     .chapter-tile { min-height: 160px; padding: 16px; }
