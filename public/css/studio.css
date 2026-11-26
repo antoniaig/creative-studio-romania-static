@@ -232,22 +232,19 @@ img { display: block; max-width: 100%; }
     .footer-social { align-items: flex-start; }
     .footer-bottom { flex-direction: column; align-items: center; gap: 10px; text-align: center; }
 }
+@media (min-width: 701px) and (max-width: 930px) {
+    .world-panel__title { font-size: clamp(26px, calc(4vw - 2px), 32px); }
+}
 @media (min-width: 701px) and (max-width: 720px) {
-    .world-panel--photo .world-panel__title { min-height: 105px; }
     .world-panel--photo .world-panel__subtitle { min-height: 61px; }
     .world-panel--photo .world-panel__description { min-height: 2.92em; }
 }
 @media (min-width: 721px) and (max-width: 754px) {
-    .world-panel--photo .world-panel__title { min-height: 71px; }
     .world-panel--photo .world-panel__subtitle { min-height: 61px; }
     .world-panel--photo .world-panel__description { min-height: 2.92em; }
 }
 @media (min-width: 755px) and (max-width: 818px) {
-    .world-panel--photo .world-panel__title { min-height: 71px; }
     .world-panel--photo .world-panel__description { min-height: 2.92em; }
-}
-@media (min-width: 819px) and (max-width: 939px) {
-    .world-panel--photo .world-panel__title { min-height: 71px; }
 }
 @media (max-width: 387px) {
     .world-panel--photo .world-panel__title { min-height: 59px; }
