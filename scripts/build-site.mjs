@@ -362,7 +362,9 @@ function homePage() {
             <span class="world-panel__title">PHOTO <em>by <img class="world-panel__title-initial" src="${root}images/brand/home/maria-initial.png" alt="M"/></em></span>
             <span class="world-panel__subtitle">Every frame tells a story.</span>
             <span class="world-panel__description">WEDDINGS · PORTRAITS · FAMILY · EVENTS · FILMS</span>
-            <img class="world-panel__signature" src="${root}images/brand/home/maria-watermark.png" alt="Maria Ghiliman Photography"/>
+            <span class="world-panel__signature world-panel__signature--photo">
+                <img src="${root}images/brand/home/maria-watermark.png" alt="Maria Ghiliman Photography"/>
+            </span>
             <span class="world-panel__link">DISCOVER THE STORIES <span class="circle-arrow" aria-hidden="true">${arrowIcon()}</span></span>
         </a>
         <a class="world-panel world-panel--creations" href="${root}creations/">
@@ -371,9 +373,11 @@ function homePage() {
             <span class="world-panel__subtitle">Handmade. Curated. Timeless.</span>
             <span class="world-panel__description">CREATIVE PIECES FOR YOU, YOUR HOME &amp; THE SEASONS.</span>
             <span class="world-panel__signature world-panel__signature--creations">
-                <img src="${root}images/brand/home/gabriela-watermark.png" alt="Gabriela Ghiliman Creations"/>
-                <span class="world-panel__signature-name" aria-hidden="true">GABRIELA</span>
-                <span class="world-panel__signature-subtitle" aria-hidden="true">CREATIONS</span>
+                <span class="world-panel__signature-artwork">
+                    <img src="${root}images/brand/home/gabriela-watermark.png" alt="Gabriela Ghiliman Creations"/>
+                    <span class="world-panel__signature-name" aria-hidden="true">GABRIELA</span>
+                    <span class="world-panel__signature-subtitle" aria-hidden="true">CREATIONS</span>
+                </span>
             </span>
             <span class="world-panel__link">EXPLORE THE COLLECTIONS <span class="circle-arrow" aria-hidden="true">${arrowIcon()}</span></span>
         </a>

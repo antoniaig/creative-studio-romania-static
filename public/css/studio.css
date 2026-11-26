@@ -113,10 +113,12 @@ img { display: block; max-width: 100%; }
 .world-panel__title em { color: #e2b77f; }
 .world-panel__title-initial { display: inline-block; width: auto; height: .85em; vertical-align: middle; }
 .world-panel__subtitle { margin-top: 10px; font: italic 25px var(--serif); }
-.world-panel__description { margin-top: 10px; font-size: 9px; letter-spacing: .12em; }
-.world-panel__signature { width: min(210px, 85%); height: 48px; margin-top: 10px; object-fit: contain; object-position: left center; }
-.world-panel__signature--creations { position: relative; display: block; width: min(300px, calc(100% + 14px)); height: auto; aspect-ratio: 4 / 1; }
-.world-panel__signature--creations img { width: 70%; height: 70%; margin-left: 26px; object-fit: contain; object-position: left center; clip-path: inset(0 0 0 52%); transform: translateY(-4px); }
+.world-panel__description { margin-top: 10px; font-size: 9px; line-height: 1.46; letter-spacing: .12em; }
+.world-panel__signature { width: min(210px, 85%); height: 75px; margin-top: 10px; }
+.world-panel__signature--photo img { width: 100%; height: 48px; object-fit: contain; object-position: left center; }
+.world-panel__signature--creations { display: block; width: min(300px, calc(100% + 14px)); height: 75px; }
+.world-panel__signature-artwork { position: relative; display: block; width: 100%; aspect-ratio: 4 / 1; }
+.world-panel__signature-artwork img { width: 70%; height: auto; margin-left: 26px; object-fit: contain; object-position: left center; clip-path: inset(0 0 0 52%); transform: translateY(-4px); }
 .world-panel__signature-name { position: absolute; top: 8%; left: 0; color: #fff8f1; font: 300 clamp(17px, calc(6.3vw - 3px), 23px)/1 var(--serif); letter-spacing: .16em; white-space: nowrap; }
 .world-panel__signature-subtitle { position: absolute; top: 41%; left: 0; font: 300 6px/1 var(--sans); letter-spacing: .5em; }
 .world-panel__link { display: flex; align-items: center; gap: 15px; margin-top: 10px; font-size: 10px; letter-spacing: .1em; }
@@ -213,7 +215,7 @@ img { display: block; max-width: 100%; }
     .hero-preview { position: relative; top: auto; right: auto; align-self: center; width: clamp(190px, 60vw, 260px); }
     .worlds { grid-template-columns: 1fr; margin-top: -100px; }
     .world-panel { min-height: 230px; padding: 24px; }
-    .world-panel__signature--creations img { width: 75%; height: 75%; margin-left: 18px; transform: translateY(-4px); }
+    .world-panel__signature-artwork img { width: 75%; margin-left: 18px; }
     .world-panel__title { font-size: 30px; }
     .chapter-grid, .listing-grid { grid-template-columns: repeat(2, 1fr); }
     .chapter-tile { min-height: 160px; padding: 16px; }
@@ -229,6 +231,32 @@ img { display: block; max-width: 100%; }
     .footer-brand, .footer-newsletter { grid-column: 1 / -1; }
     .footer-social { align-items: flex-start; }
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+@media (min-width: 701px) and (max-width: 720px) {
+    .world-panel--photo .world-panel__title { min-height: 105px; }
+    .world-panel--photo .world-panel__subtitle { min-height: 61px; }
+    .world-panel--photo .world-panel__description { min-height: 2.92em; }
+}
+@media (min-width: 721px) and (max-width: 754px) {
+    .world-panel--photo .world-panel__title { min-height: 71px; }
+    .world-panel--photo .world-panel__subtitle { min-height: 61px; }
+    .world-panel--photo .world-panel__description { min-height: 2.92em; }
+}
+@media (min-width: 755px) and (max-width: 818px) {
+    .world-panel--photo .world-panel__title { min-height: 71px; }
+    .world-panel--photo .world-panel__description { min-height: 2.92em; }
+}
+@media (min-width: 819px) and (max-width: 939px) {
+    .world-panel--photo .world-panel__title { min-height: 71px; }
+}
+@media (max-width: 387px) {
+    .world-panel--photo .world-panel__title { min-height: 59px; }
+}
+@media (max-width: 374px) {
+    .world-panel--photo .world-panel__subtitle { min-height: 61px; }
+}
+@media (max-width: 395px) {
+    .world-panel--photo .world-panel__description { min-height: 2.92em; }
 }
 @media (max-width: 400px) {
     .hero-actions { gap: 10px; }
