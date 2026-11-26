@@ -1,10 +1,15 @@
-import { cp, mkdir, rm, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputRoot = path.join(projectRoot, "dist");
 const publicRoot = path.join(projectRoot, "public");
+const stylesheetVersion = createHash("sha256")
+    .update(await readFile(path.join(publicRoot, "css", "studio.css")))
+    .digest("hex")
+    .slice(0, 12);
 
 const photographyChapters = [
     {
@@ -239,7 +244,7 @@ function page({ title, description, body, depth = 0, isHome = false, includeSear
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;family=Playfair+Display:ital@1&amp;display=swap"/>
     ${homePreload}
-    <link rel="stylesheet" href="${root}css/studio.css"/>
+    <link rel="stylesheet" href="${root}css/studio.css?v=${stylesheetVersion}"/>
 </head>
 <body data-root-prefix="${root}">
     <div class="cursor-accent" aria-hidden="true"><span>VIEW</span></div>
