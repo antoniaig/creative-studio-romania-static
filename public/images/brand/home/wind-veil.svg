@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="fabric" x1="0" y1="0" x2=".5" y2="1">
+      <stop stop-color="#fffaf4" stop-opacity=".12"/>
+      <stop offset=".35" stop-color="#fffaf4" stop-opacity=".65"/>
+      <stop offset=".7" stop-color="#f8eadc" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#fffaf4" stop-opacity=".55"/>
+    </linearGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
+    <clipPath id="fabric-edge">
+      <path d="M800 0 H535 C520 170 475 300 390 460 C315 610 230 765 150 900 H800Z"/>
+    </clipPath>
+  </defs>
+  <g filter="url(#soft)">
+    <path d="M800 0 H535 C520 170 475 300 390 460 C315 610 230 765 150 900 H800Z" fill="url(#fabric)"/>
+    <g clip-path="url(#fabric-edge)">
+      <path d="M566 0 C548 145 500 225 493 310 C484 410 416 520 365 620 C320 710 240 815 194 900" fill="none" stroke="#fffaf4" stroke-opacity=".22" stroke-width="9"/>
+      <path d="M665 0 C650 145 612 225 602 310 C591 410 530 520 480 620 C435 710 360 815 315 900" fill="none" stroke="#fffaf4" stroke-opacity=".17" stroke-width="7"/>
+      <path d="M746 0 C738 145 700 225 690 310 C679 410 623 520 575 620 C533 710 470 815 430 900" fill="none" stroke="#fffaf4" stroke-opacity=".15" stroke-width="8"/>
+    </g>
+  </g>
+</svg>
