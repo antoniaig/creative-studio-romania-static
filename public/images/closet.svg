@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100">
+  <defs>
+    <linearGradient id="atelier" x2="1" y2="1"><stop stop-color="#b7a18a"/><stop offset=".52" stop-color="#79634f"/><stop offset="1" stop-color="#35271f"/></linearGradient>
+    <linearGradient id="silk" x2=".8" y2="1"><stop stop-color="#f1e7d8"/><stop offset=".58" stop-color="#d4c2aa"/><stop offset="1" stop-color="#9d8264"/></linearGradient>
+  </defs>
+  <rect width="900" height="1100" fill="url(#atelier)"/>
+  <path d="M72 0h384v752H72z" fill="#d8c5a7" opacity=".27"/>
+  <path d="M114 0h24v752h-24zM292 0h18v752h-18zM72 244h384v18H72z" fill="#4d392b" opacity=".58"/>
+  <path d="M520 110h286v710H520z" fill="#241a16" opacity=".35"/>
+  <path d="M576 178h174v560H576z" fill="#d9c7af" opacity=".28"/>
+  <path d="M290 232h286v26H290z" fill="#49382b"/>
+  <path d="M423 215c-42-10-73-29-93-58 45-10 77 5 93 41 18-40 48-56 91-49-16 37-45 58-91 66z" fill="none" stroke="#d8c5a7" stroke-width="13"/>
+  <path d="M423 256 329 414l-91 134 72 40 77-99v360h264V489l75 99 72-40-91-134-94-158z" fill="url(#silk)"/>
+  <path d="m329 414 92 75 97-76M387 488l-27 361M520 488l20 361" fill="none" stroke="#a58a69" stroke-width="6" opacity=".65"/>
+  <path d="M238 588h488l-34 52H271zM283 848h415v39H283z" fill="#3b2b21"/>
+  <path d="M300 938h384v33H300zM328 971v129M657 971v129" fill="#2d2119"/>
+  <path d="M342 920c36-57 94-63 150-10l-18 29H354zM516 914c37-49 88-54 130-4l-10 29H527z" fill="#b6a184"/>
+  <path d="M0 1070c258-60 530-52 900 0v30H0z" fill="#241a16" opacity=".75"/>
+</svg>

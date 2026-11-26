@@ -1,0 +1,14 @@
+{
+  "name": "creative-studio-romania",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static photography and creative studio website",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build-site.mjs",
+    "dev": "node scripts/preview.mjs",
+    "test": "node --test"
+  }
+}

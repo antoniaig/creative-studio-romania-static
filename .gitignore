@@ -1,0 +1,12 @@
+/target/
+/data/
+/dist/
+/.vscode/
+/.github/modernize/
+.env
+.env.*
+*.log
+*.pem
+*.key
+*.p12
+*.jks

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#806047"/>
+      <stop offset=".45" stop-color="#4a3328"/>
+      <stop offset="1" stop-color="#241a16"/>
+    </linearGradient>
+    <linearGradient id="light" x1="0" y1="0" x2=".8" y2="1">
+      <stop stop-color="#ead9bd"/>
+      <stop offset=".55" stop-color="#bd9b73"/>
+      <stop offset="1" stop-color="#6c4a34"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#76543d"/>
+      <stop offset="1" stop-color="#201713"/>
+    </linearGradient>
+    <clipPath id="arch">
+      <path d="M985 900V390a340 340 0 0 1 680 0v510z"/>
+    </clipPath>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#wall)"/>
+  <path d="M0 90h1920v990H0z" fill="#30221b" opacity=".26"/>
+  <path d="M897 920V390a428 428 0 0 1 856 0v530z" fill="#b69a76" opacity=".42"/>
+  <path d="M985 900V390a340 340 0 0 1 680 0v510z" fill="#d4b992"/>
+  <g clip-path="url(#arch)">
+    <path d="M970 190h720v735H970z" fill="url(#light)"/>
+    <circle cx="1460" cy="430" r="145" fill="#e5c992" opacity=".76"/>
+    <path d="M1000 710c150-145 293-119 420-3 116-81 211-68 288 1v220h-708z" fill="#58604a" opacity=".86"/>
+    <path d="M970 790c183-98 375-35 482 31 102-74 196-75 281-29v156H970z" fill="#343e31"/>
+    <path d="M1010 910h660v150h-660z" fill="url(#floor)"/>
+    <path d="M1300 910 1480 565l240 345z" fill="#f3dfb9" opacity=".23"/>
+    <g fill="#38271d" opacity=".88">
+      <path d="M1575 800c7-155 15-293 42-407 14 150 8 268 13 407z"/>
+      <path d="M1593 500c-88-31-131-88-141-166 87 34 132 89 141 166z"/>
+      <path d="M1604 452c32-103 91-157 179-176-36 93-96 149-179 176z"/>
+      <path d="M1601 596c-96-16-157-62-189-141 94 18 157 65 189 141z"/>
+      <path d="M1617 553c55-78 119-112 197-105-58 72-122 108-197 105z"/>
+    </g>
+  </g>
+  <path d="M0 0h920c-76 180-72 420-22 680 35 181 116 307 202 400H0z" fill="#3a2920" opacity=".52"/>
+  <path d="M0 905c305-84 544-49 792 42 160 59 310 66 492-17 211-96 422-101 636-41v191H0z" fill="#201713" opacity=".72"/>
+  <path d="M1050 953c235-91 449-57 705 5 61 15 114 23 165 19v103h-870z" fill="#160f0c" opacity=".46"/>
+  <g fill="none" stroke="#d8c5a7" opacity=".26">
+    <path d="M912 916V390a413 413 0 0 1 826 0v526" stroke-width="2"/>
+    <path d="M960 916V390a365 365 0 0 1 730 0v526" stroke-width="1"/>
+  </g>
+</svg>
