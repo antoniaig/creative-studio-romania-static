@@ -328,6 +328,7 @@ function detailPage(item, group) {
 function homePage() {
     const root = "./";
     return `<main class="home-page">
+    <div class="home-veil" aria-hidden="true"><div class="home-veil__fabric"></div></div>
     <section class="home-hero" id="home" aria-labelledby="hero-title">
         <div class="hero-inner content-section">
             <nav class="hero-index" aria-label="Homepage sections">

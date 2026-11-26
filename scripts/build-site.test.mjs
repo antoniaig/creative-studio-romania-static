@@ -34,6 +34,7 @@ test("builds a self-contained static site with every current route", async () =>
         "css/studio.css",
         "js/app.js",
         "images/brand/home/lion.jpg",
+        "images/brand/home/wind-veil.svg",
         "videos/studio-story.mp4"
     ];
 
@@ -44,6 +45,7 @@ test("builds a self-contained static site with every current route", async () =>
     const home = await readFile(path.join(projectRoot, "dist/index.html"), "utf8");
     assert.match(home, /aria-label="Homepage sections"/);
     assert.match(home, /id="video-dialog"/);
+    assert.match(home, /class="home-veil" aria-hidden="true"/);
     assert.match(home, /class="hero-watch__play" aria-hidden="true"><svg class="play-icon"/);
     assert.match(home, /class="circle-arrow" aria-hidden="true"><svg class="arrow-icon"/);
     assert.match(home, /class="world-panel__signature-name" aria-hidden="true">GABRIELA<\/span>/);
