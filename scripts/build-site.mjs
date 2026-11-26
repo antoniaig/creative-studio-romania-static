@@ -82,6 +82,15 @@ function escapeHtml(value) {
         .replaceAll("'", "&#39;");
 }
 
+function arrowIcon(direction = "right") {
+    const orientation = direction === "left" ? " arrow-icon--left" : "";
+    return `<svg class="arrow-icon${orientation}" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4.5 12h15"/><path d="m13.5 6 6 6-6 6"/></svg>`;
+}
+
+function playIcon() {
+    return `<svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 6.75 9 5.25-9 5.25z"/></svg>`;
+}
+
 function safeSocialUrl(value, name) {
     if (!value) return "";
     let url;
@@ -150,7 +159,7 @@ function header(prefix, isHome) {
                 <label for="site-search-input">SEARCH THE STUDIO</label>
                 <div class="search-panel__field">
                     <input id="site-search-input" type="search" name="q" placeholder="Weddings, handmade, home…" autocomplete="off"/>
-                    <button type="submit" aria-label="Submit search">↗</button>
+                    <button type="submit" aria-label="Submit search">${arrowIcon()}</button>
                 </div>
             </form>
         </div>
@@ -253,7 +262,7 @@ function tile(item, prefix) {
     <span class="listing-tile__number">${escapeHtml(item.number)}</span>
     <span class="listing-tile__title">${escapeHtml(item.title)}</span>
     <span class="listing-tile__description">${escapeHtml(item.description)}</span>
-    <span class="listing-tile__arrow" aria-hidden="true">↗</span>
+    <span class="listing-tile__arrow" aria-hidden="true">${arrowIcon()}</span>
 </a>`;
 }
 
@@ -262,7 +271,7 @@ function chapterTile(item, prefix) {
     <img src="${escapeHtml(prefix + `images/brand/${item.assetFolder}/${item.slug}.jpg`)}" alt="${escapeHtml(item.title)}" loading="lazy"/>
     <span class="chapter-tile__copy"><span class="chapter-tile__number">${escapeHtml(item.number)}</span>
         <span class="chapter-tile__title">${escapeHtml(item.title)}</span></span>
-    <span class="circle-arrow" aria-hidden="true">→</span>
+    <span class="circle-arrow" aria-hidden="true">${arrowIcon()}</span>
 </a>`;
 }
 
@@ -297,14 +306,14 @@ function detailPage(item, group) {
             <p class="eyebrow eyebrow--dark">${escapeHtml(item.number)}</p>
             <h1>${escapeHtml(item.title)}</h1>
             <p>${escapeHtml(item.description)}</p>
-            <a class="text-link" href="${root}${parentPath}"><span aria-hidden="true">←</span> BACK TO ${escapeHtml(parentLabel.toUpperCase())}</a>
+            <a class="text-link" href="${root}${parentPath}"><span class="text-link__icon text-link__icon--leading">${arrowIcon("left")}</span> BACK TO ${escapeHtml(parentLabel.toUpperCase())}</a>
         </div>
     </section>
     <section class="detail-related content-section">
         <div class="section-heading">
             <div><p class="eyebrow eyebrow--dark">${group === "photography" ? "PHOTOGRAPHY CHAPTERS" : "THE COLLECTIONS"}</p>
                 <h2>More from <em>${escapeHtml(parentLabel)}.</em></h2></div>
-            <a class="text-link" href="${root}${parentPath}">VIEW ALL <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="${root}${parentPath}">VIEW ALL <span class="text-link__icon">${arrowIcon()}</span></a>
         </div>
         <div class="chapter-grid">${siblings.map((related) => chapterTile(related, root)).join("\n            ")}</div>
     </section>
@@ -327,7 +336,7 @@ function homePage() {
                 <h1 id="hero-title"><em>ART.</em><br/>MEMORIES.<br/><em>CREATIONS.</em></h1>
                 <p class="hero-tagline">CAPTURING MOMENTS. CRAFTING STORIES.</p>
                 <div class="hero-actions">
-                    <a class="button button--gold" href="#studio-worlds">EXPLORE THE STUDIO <span aria-hidden="true">→</span></a>
+                    <a class="button button--gold" href="#studio-worlds">EXPLORE THE STUDIO <span class="button__icon">${arrowIcon()}</span></a>
                     <a class="button button--outline" href="${root}about/">OUR STORY</a>
                 </div>
             </div>
@@ -335,7 +344,7 @@ function homePage() {
                 <span class="hero-preview__image hero-preview__image--photo" aria-hidden="true"></span>
                 <span class="hero-preview__image hero-preview__image--creations" aria-hidden="true"></span>
                 <button class="hero-watch" type="button" data-video-open="true">
-                    <span class="hero-watch__play" aria-hidden="true">▶</span>
+                    <span class="hero-watch__play" aria-hidden="true">${playIcon()}</span>
                     <span>WATCH<br/>OUR STORY</span>
                 </button>
             </div>
@@ -348,7 +357,7 @@ function homePage() {
             <span class="world-panel__subtitle">Every frame tells a story.</span>
             <span class="world-panel__description">WEDDINGS · PORTRAITS · FAMILY · EVENTS · FILMS</span>
             <img class="world-panel__signature" src="${root}images/brand/home/maria-watermark.png" alt="Maria Ghiliman Photography"/>
-            <span class="world-panel__link">DISCOVER THE STORIES <span class="circle-arrow" aria-hidden="true">→</span></span>
+            <span class="world-panel__link">DISCOVER THE STORIES <span class="circle-arrow" aria-hidden="true">${arrowIcon()}</span></span>
         </a>
         <a class="world-panel world-panel--creations" href="${root}creations/">
             <img class="world-panel__monogram" src="${root}images/brand/home/gabriela-initial.png" alt="" aria-hidden="true"/>
@@ -359,20 +368,20 @@ function homePage() {
                 <img src="${root}images/brand/home/gabriela-watermark.png" alt="Gabriela Ghiliman Creations"/>
                 <span aria-hidden="true">CREATIONS</span>
             </span>
-            <span class="world-panel__link">EXPLORE THE COLLECTIONS <span class="circle-arrow" aria-hidden="true">→</span></span>
+            <span class="world-panel__link">EXPLORE THE COLLECTIONS <span class="circle-arrow" aria-hidden="true">${arrowIcon()}</span></span>
         </a>
     </section>
     <section class="chapters content-section" id="photography-chapters">
         <div class="section-heading">
             <div><p class="eyebrow eyebrow--dark">PHOTO BY M · PHOTOGRAPHY &amp; FILMS</p><h2>Stories in <em>chapters.</em></h2></div>
-            <a class="text-link" href="${root}photography/">VIEW ALL STORIES <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="${root}photography/">VIEW ALL STORIES <span class="text-link__icon">${arrowIcon()}</span></a>
         </div>
         <div class="chapter-grid">${photographyChapters.map((item) => chapterTile({ ...item, path: `photography/${item.slug}/` }, root)).join("\n            ")}</div>
     </section>
     <section class="collections content-section" id="creation-collections">
         <div class="section-heading">
             <div><p class="eyebrow eyebrow--dark">THE CREATIONS BY G · MADE WITH HEART</p><h2>Objects with <em>meaning.</em></h2></div>
-            <a class="text-link" href="${root}creations/">VIEW ALL COLLECTIONS <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="${root}creations/">VIEW ALL COLLECTIONS <span class="text-link__icon">${arrowIcon()}</span></a>
         </div>
         <div class="chapter-grid">${creationCollections.map((item) => chapterTile({ ...item, path: `creations/${item.slug}/` }, root)).join("\n            ")}</div>
     </section>

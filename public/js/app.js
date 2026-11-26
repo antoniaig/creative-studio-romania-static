@@ -64,7 +64,7 @@ if (searchResults) {
         const arrow = document.createElement("span");
         arrow.className = "listing-tile__arrow";
         arrow.setAttribute("aria-hidden", "true");
-        arrow.textContent = "↗";
+        arrow.innerHTML = '<svg class="arrow-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4.5 12h15"/><path d="m13.5 6 6 6-6 6"/></svg>';
 
         link.append(imageFrame, number, itemTitle, description, arrow);
         searchResults.append(link);
