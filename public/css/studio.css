@@ -210,6 +210,10 @@ img { display: block; max-width: 100%; }
     .chapter-grid, .listing-grid { grid-template-columns: repeat(2, 1fr); }
     .chapter-tile { min-height: 160px; padding: 16px; }
     .chapter-tile__title { font-size: 23px; }
+    .circle-arrow, .listing-tile__arrow { width: auto; height: auto; border: 0; border-radius: 0; background: transparent; color: #e2b77f; }
+    .circle-arrow .arrow-icon, .listing-tile__arrow .arrow-icon { width: 14px; height: 14px; }
+    .listing-tile__arrow { align-self: flex-end; }
+    .world-panel:hover .circle-arrow, .chapter-tile:hover .circle-arrow, .listing-tile:hover .listing-tile__arrow { background: transparent; color: #e2b77f; }
     .section-heading { align-items: flex-start; flex-direction: column; }
     .landing-detail { grid-template-columns: 1fr; }
     .landing-detail__image { max-height: 380px; overflow: hidden; }
@@ -219,7 +223,6 @@ img { display: block; max-width: 100%; }
     .hero-actions { gap: 10px; }
     .button { padding: 0 16px; }
     .button--outline { min-width: 110px; }
-    .chapter-tile .circle-arrow { display: none; }
     .footer-grid { grid-template-columns: 1fr; }
 }
 @media (hover: none), (pointer: coarse) {

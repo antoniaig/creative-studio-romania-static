@@ -60,6 +60,9 @@ test("builds a self-contained static site with every current route", async () =>
     const photography = await readFile(path.join(projectRoot, "dist/photography/index.html"), "utf8");
     assert.match(photography, /class="listing-tile__arrow" aria-hidden="true"><svg class="arrow-icon"/);
 
+    const css = await readFile(path.join(projectRoot, "dist/css/studio.css"), "utf8");
+    assert.match(css, /@media \(max-width: 700px\) \{[\s\S]*?\.circle-arrow, \.listing-tile__arrow \{ width: auto; height: auto; border: 0;/);
+
     const detail = await readFile(path.join(projectRoot, "dist/photography/weddings/index.html"), "utf8");
     assert.match(detail, /href="\.\.\/\.\.\/photography\/"/);
     assert.match(detail, /src="\.\.\/\.\.\/images\/brand\/photography\/weddings\.jpg"/);
