@@ -46,6 +46,7 @@ test("builds a self-contained static site with every current route", async () =>
     assert.match(home, /id="video-dialog"/);
     assert.match(home, /class="hero-watch__play" aria-hidden="true"><svg class="play-icon"/);
     assert.match(home, /class="circle-arrow" aria-hidden="true"><svg class="arrow-icon"/);
+    assert.match(home, /class="world-panel__signature-name" aria-hidden="true">GABRIELA<\/span>/);
     assert.match(home, /href="\.\/css\/studio\.css\?v=[a-f0-9]{12}"/);
     assert.match(home, /rel="preload" as="image" href="\.\/images\/brand\/home\/lion\.jpg" fetchpriority="high"/);
     assert.match(home, /VIEW ALL STORIES <span class="text-link__icon"><svg class="arrow-icon"/);

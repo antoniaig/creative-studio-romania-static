@@ -242,7 +242,7 @@ function page({ title, description, body, depth = 0, isHome = false, includeSear
     <title>${escapeHtml(title)} | Creative Studio Romania</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;family=Playfair+Display:ital@1&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;family=Playfair+Display:ital@1&amp;display=swap"/>
     ${homePreload}
     <link rel="stylesheet" href="${root}css/studio.css?v=${stylesheetVersion}"/>
 </head>
@@ -371,7 +371,8 @@ function homePage() {
             <span class="world-panel__description">CREATIVE PIECES FOR YOU, YOUR HOME &amp; THE SEASONS.</span>
             <span class="world-panel__signature world-panel__signature--creations">
                 <img src="${root}images/brand/home/gabriela-watermark.png" alt="Gabriela Ghiliman Creations"/>
-                <span aria-hidden="true">CREATIONS</span>
+                <span class="world-panel__signature-name" aria-hidden="true">GABRIELA</span>
+                <span class="world-panel__signature-subtitle" aria-hidden="true">CREATIONS</span>
             </span>
             <span class="world-panel__link">EXPLORE THE COLLECTIONS <span class="circle-arrow" aria-hidden="true">${arrowIcon()}</span></span>
         </a>
