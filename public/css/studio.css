@@ -208,7 +208,7 @@ img { display: block; max-width: 100%; }
     .brand-name { font-size: 13px; }
     .home-hero, .hero-inner { min-height: max(800px, 100vh); min-height: max(800px, 100svh); }
     .home-page::before { background-position: center, 45% center; }
-    .home-veil__fabric { width: calc(55% + 17vh); width: calc(55% + 17svh); opacity: .7; animation-name: veil-breeze-mobile; }
+    .home-veil__fabric { width: calc(55% + 17vh); width: calc(55% + 17svh); opacity: .7; animation-name: veil-breeze-mobile; animation-duration: 22s; }
     .hero-inner { flex-direction: column; align-items: flex-start; justify-content: center; gap: 24px; padding-top: 120px; padding-bottom: 150px; }
     .hero-index { display: none; }
     .hero-copy h1 { font-size: clamp(38px, 11vw, 65px); }
@@ -230,7 +230,7 @@ img { display: block; max-width: 100%; }
     .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; padding-top: 48px; padding-bottom: 40px; }
     .footer-brand, .footer-newsletter { grid-column: 1 / -1; }
     .footer-social { align-items: flex-start; }
-    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .footer-bottom { flex-direction: column; align-items: center; gap: 10px; text-align: center; }
 }
 @media (min-width: 701px) and (max-width: 720px) {
     .world-panel--photo .world-panel__title { min-height: 105px; }
