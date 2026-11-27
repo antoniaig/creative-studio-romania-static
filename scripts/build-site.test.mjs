@@ -70,6 +70,7 @@ test("builds a self-contained static site with every current route", async () =>
 
     const photography = await readFile(path.join(projectRoot, "dist/photography/index.html"), "utf8");
     assert.match(photography, /class="listing-tile__arrow" aria-hidden="true"><svg class="arrow-icon"/);
+    assert.match(photography, /<a class="listing-tile" href="\.\.\/photography\/craciun\/">[\s\S]*?src="\.\.\/images\/brand\/photography\/christmas\/christmas-03\.jpg"[\s\S]*?class="listing-tile__title">Crăciun<\/span>/);
 
     const christmas = await readFile(path.join(projectRoot, "dist/photography/craciun/index.html"), "utf8");
     assert.match(christmas, /href="\.\.\/\.\.\/programari\/"/);

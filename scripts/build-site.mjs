@@ -285,7 +285,7 @@ function page({ title, description, body, depth = 0, isHome = false, includeSear
 function tile(item, prefix) {
     return `<a class="listing-tile" href="${escapeHtml(prefix + item.path)}">
     <span class="listing-tile__image">
-        <img src="${escapeHtml(prefix + `images/brand/${item.assetFolder}/${item.slug}.jpg`)}" alt="${escapeHtml(item.title + " editorial cover")}" loading="lazy"/>
+        <img src="${escapeHtml(prefix + `images/brand/${item.assetFolder}/${item.image || item.slug}.jpg`)}" alt="${escapeHtml(item.title + " editorial cover")}" loading="lazy"/>
     </span>
     <span class="listing-tile__number">${escapeHtml(item.number)}</span>
     <span class="listing-tile__title">${escapeHtml(item.title)}</span>
@@ -542,7 +542,18 @@ await writePage("photography/index.html", page({
         title: "Photo by M",
         eyebrow: "PHOTOGRAPHY & FILMS",
         description: "Every frame tells a story. Explore the studio's photography chapters.",
-        items: photographyChapters.map((item) => ({ ...item, path: `photography/${item.slug}/` }))
+        items: [
+            ...photographyChapters.map((item) => ({ ...item, path: `photography/${item.slug}/` })),
+            {
+                path: "photography/craciun/",
+                slug: "craciun",
+                number: "O POVESTE DE IARNĂ",
+                title: "Crăciun",
+                description: "Momente calde și amintiri de Crăciun.",
+                assetFolder: "photography",
+                image: "christmas/christmas-03"
+            }
+        ]
     }),
     depth: 1
 }));
