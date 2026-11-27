@@ -11,11 +11,21 @@ const stylesheetVersion = createHash("sha256")
     .digest("hex")
     .slice(0, 12);
 const bookingSessions = [
-    { title: "Portret", duration: "60 min", description: "Un moment doar pentru tine.", image: "portraits", slug: "sedinta-foto-portret" },
-    { title: "Cuplu", duration: "90 min", description: "Povestea voastră, în imagini.", image: "weddings", slug: "sedinta-foto-cuplu" },
-    { title: "Familie", duration: "90 min", description: "Amintiri împreună, de păstrat.", image: "family", slug: "sedinta-foto-familie" }
+    { title: "Little", duration: "1 oră", description: "Ședință foto de Crăciun.", image: "christmas/christmas-07", slug: "craciun-little" },
+    { title: "Signature", duration: "2 ore", description: "Ședință foto de Crăciun.", image: "christmas/christmas-02", slug: "craciun-signature" },
+    { title: "Grand", duration: "3 ore", description: "Ședință foto de Crăciun.", image: "christmas/christmas-03", slug: "craciun-grand" }
 ];
 const bookingBaseUrl = "https://cal.com/antonia-ghiliman-p1v0nm";
+const christmasPhotos = [
+    { file: "christmas-01.jpg", alt: "Decor de Crăciun cu brad și fotoliu roșu" },
+    { file: "christmas-02.jpg", alt: "Mamă și copil într-un decor de sărbătoare cu lumini" },
+    { file: "christmas-03.jpg", alt: "Familie cu un copil în decorul de Crăciun" },
+    { file: "christmas-04.jpg", alt: "Portret de bebeluș într-un decor cu lumini de Crăciun" },
+    { file: "christmas-05.jpg", alt: "Familie împreună în decorul de Crăciun" },
+    { file: "christmas-06.jpg", alt: "Portret de copil lângă bradul de Crăciun" },
+    { file: "christmas-07.jpg", alt: "Tată și copil într-un decor de sărbătoare" },
+    { file: "christmas-08.jpg", alt: "Mamă și copil îmbrățișați într-un decor de Crăciun" }
+];
 const bookingStylesheetVersion = createHash("sha256")
     .update(await readFile(path.join(publicRoot, "css", "booking.css")))
     .digest("hex")
@@ -399,6 +409,17 @@ function homePage() {
             <span class="world-panel__link">EXPLORE THE COLLECTIONS <span class="circle-arrow" aria-hidden="true">${arrowIcon()}</span></span>
         </a>
     </section>
+    <section class="christmas-feature content-section" aria-labelledby="christmas-feature-title" lang="ro">
+        <div class="christmas-feature__copy">
+            <p class="eyebrow eyebrow--dark">PHOTO BY M · O POVESTE DE IARNĂ</p>
+            <h2 id="christmas-feature-title">Magia Crăciunului, <em>în imagini.</em></h2>
+            <p>Momente calde, zâmbete și amintiri de păstrat.</p>
+            <a class="text-link" href="${root}photography/craciun/">DESCOPERĂ GALERIA <span class="text-link__icon">${arrowIcon()}</span></a>
+        </div>
+        <a class="christmas-feature__image" href="${root}photography/craciun/" aria-label="Descoperă galeria foto de Crăciun">
+            <img src="${root}images/brand/photography/christmas/christmas-03.jpg" alt="" loading="lazy"/>
+        </a>
+    </section>
     <section class="chapters content-section" id="photography-chapters">
         <div class="section-heading">
             <div><p class="eyebrow eyebrow--dark">PHOTO BY M · PHOTOGRAPHY &amp; FILMS</p><h2>Stories in <em>chapters.</em></h2></div>
@@ -417,6 +438,25 @@ function homePage() {
         <button class="video-dialog__close" type="button" data-video-close="true" aria-label="Close video">×</button>
         <video controls preload="none" src="${root}videos/studio-story.mp4">Your browser does not support video playback.</video>
     </dialog>
+</main>`;
+}
+
+function christmasGalleryPage() {
+    const images = christmasPhotos.map((photo) =>
+        `<img src="../../images/brand/photography/christmas/${photo.file}" alt="${escapeHtml(photo.alt)}" loading="lazy" decoding="async"/>`
+    ).join("\n            ");
+    return `<main class="landing-page">
+    <section class="landing-intro content-section">
+        <p class="eyebrow eyebrow--dark">PHOTO BY M · O POVESTE DE IARNĂ</p>
+        <h1>Crăciun în <em>imagini.</em></h1>
+        <p class="landing-intro__summary">Lumini calde, oameni dragi și momente pe care le păstrăm aproape.</p>
+    </section>
+    <section class="christmas-gallery content-section" aria-label="Galerie foto de Crăciun">
+        <div class="christmas-gallery__grid">
+            ${images}
+        </div>
+        <a class="text-link" href="../../programari/">REZERVĂ O ȘEDINȚĂ <span class="text-link__icon">${arrowIcon()}</span></a>
+    </section>
 </main>`;
 }
 
@@ -455,7 +495,7 @@ function bookingPage() {
         <div class="booking-intro">
             <p class="eyebrow eyebrow--dark">PHOTO BY M · CREATIVE STUDIO</p>
             <h1 id="booking-title">Rezervă o <em>ședință.</em></h1>
-            <p class="booking-intro__copy">Fiecare poveste merită păstrată. Alege ziua și ora potrivite pentru următoarea ta ședință foto.</p>
+            <p class="booking-intro__copy">Fiecare poveste merită păstrată. Alege pachetul de Crăciun și momentul potrivit pentru ședința ta foto.</p>
             <a class="booking-intro__link" href="#sedinte">ALEGE UN MOMENT <span class="booking-arrow--down" aria-hidden="true">↓</span><span class="booking-arrow--right" aria-hidden="true">→</span></a>
         </div>
         <div class="booking-sessions" id="sedinte" aria-label="Tipuri de ședințe foto">
@@ -527,6 +567,14 @@ for (const item of photographyChapters) {
         depth: 2
     }));
 }
+
+await writePage("photography/craciun/index.html", page({
+    title: "Galerie foto de Crăciun",
+    description: "Descoperă galeria foto de Crăciun Creative Studio Romania.",
+    body: christmasGalleryPage(),
+    depth: 2,
+    language: "ro"
+}));
 
 for (const item of creationCollections) {
     await writePage(`creations/${item.slug}/index.html`, page({

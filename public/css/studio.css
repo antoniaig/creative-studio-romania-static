@@ -135,7 +135,17 @@ img { display: block; max-width: 100%; }
 .world-panel:hover .arrow-icon, .chapter-tile:hover .arrow-icon, .listing-tile:hover .arrow-icon { transform: translateX(2px); }
 .button__icon { display: inline-flex; align-items: center; }
 
-.home-page .worlds, .home-page .chapters, .home-page .collections { position: relative; z-index: 2; }
+.home-page .worlds, .home-page .christmas-feature, .home-page .chapters, .home-page .collections { position: relative; z-index: 2; }
+.christmas-feature { display: grid; grid-template-columns: 1fr 1.15fr; align-items: center; margin-top: 40px; overflow: hidden; border: 1px solid #e0cdb8; background: #fffaf5; }
+.christmas-feature__copy { padding: clamp(24px, 5vw, 65px); }
+.christmas-feature__copy h2 { margin: 12px 0; font: 500 clamp(38px, 4vw, 58px)/.95 var(--serif); }
+.christmas-feature__copy h2 em, .landing-intro h1 em { color: #a37446; font-weight: 400; }
+.christmas-feature__copy > p:not(.eyebrow) { margin: 18px 0 25px; line-height: 1.7; }
+.christmas-feature__image { align-self: stretch; min-height: 280px; overflow: hidden; background: #e9dacb; }
+.christmas-feature__image img { width: 100%; height: 100%; object-fit: contain; }
+.christmas-gallery { padding-top: 40px; padding-bottom: 80px; text-align: center; }
+.christmas-gallery__grid { columns: 3; column-gap: 16px; margin-bottom: 36px; text-align: left; }
+.christmas-gallery__grid img { width: 100%; height: auto; margin-bottom: 16px; break-inside: avoid; }
 .chapters, .collections, .detail-related { padding-top: 28px; padding-bottom: 20px; }
 .collections { padding-bottom: 70px; }
 .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 14px; }
@@ -223,6 +233,11 @@ img { display: block; max-width: 100%; }
     .world-panel { min-height: 230px; padding: 24px; }
     .world-panel__signature-artwork img { width: 75%; margin-left: 18px; }
     .world-panel__title { font-size: 30px; }
+    .christmas-feature { grid-template-columns: 1fr; }
+    .christmas-feature__image { min-height: 0; }
+    .christmas-feature__image img { height: auto; }
+    .christmas-gallery__grid { columns: 2; column-gap: 10px; }
+    .christmas-gallery__grid img { margin-bottom: 10px; }
     .chapter-grid, .listing-grid { grid-template-columns: repeat(2, 1fr); }
     .chapter-tile { min-height: 160px; padding: 16px; }
     .chapter-tile__title { font-size: 23px; }

@@ -48,10 +48,14 @@ variables in the Vercel project settings, then redeploy.
   the static build.
 - Photography chapters and collections are currently maintained in the build
   script. Search runs entirely in the visitor's browser.
+- The Christmas gallery uses the locally stored, web-optimized photographs in
+  `public/images/brand/photography/christmas/`; its photo list and descriptions
+  are maintained in `scripts/build-site.mjs`. It does not depend on Google Drive.
 - The newsletter link directs visitors to Contact; subscription storage and
   delivery are not implemented.
 - `programari/` embeds the Cal.com booking pages listed in `bookingSessions`
-  in `scripts/build-site.mjs`. Availability, duration, booking fields and
+  in `scripts/build-site.mjs`. It currently displays the seasonal Little,
+  Signature and Grand packages. Availability, duration, booking fields and
   cancellations are managed in Cal.com, with Google Calendar connected; no
   custom booking backend or online payments are included.
 
