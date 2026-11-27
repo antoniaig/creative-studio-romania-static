@@ -10,6 +10,11 @@ const stylesheetVersion = createHash("sha256")
     .update(await readFile(path.join(publicRoot, "css", "studio.css")))
     .digest("hex")
     .slice(0, 12);
+const bookingUrl = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2JSIH-buLqWMsW9BYB1pw-doO_SmgJWroP4uNmlQ4QWT3q0fylHDuTPLnKjjlF8FLhoFNwsXBN";
+const bookingStylesheetVersion = createHash("sha256")
+    .update(await readFile(path.join(publicRoot, "css", "booking.css")))
+    .digest("hex")
+    .slice(0, 12);
 
 const photographyChapters = [
     {
@@ -138,6 +143,7 @@ function header(prefix, isHome) {
                 <div class="nav-dropdown__menu">
                     <a href="${root}photography/">All photography</a>
                     ${photographyChapters.map((item) => `<a href="${root}photography/${item.slug}/">${escapeHtml(item.title)}</a>`).join("\n                    ")}
+                    <a href="${root}programari/">Rezervă o ședință</a>
                 </div>
             </details>
             <details class="nav-dropdown">
@@ -199,6 +205,7 @@ function footer(prefix) {
             <p class="footer-label">EXPLORE</p>
             <nav aria-label="Footer navigation">
                 <a href="${root}photography/">Photo by M</a>
+                <a href="${root}programari/">Rezervă o ședință</a>
                 <a href="${root}creations/">The Creations by G</a>
                 <a href="${root}about/">About the studio</a>
                 <a href="${root}contact/">Contact</a>
@@ -224,7 +231,7 @@ function footer(prefix) {
 </footer>`;
 }
 
-function page({ title, description, body, depth = 0, isHome = false, includeSearchData = false }) {
+function page({ title, description, body, depth = 0, isHome = false, includeSearchData = false, language = "en", stylesheet = "" }) {
     const root = rootPrefix(depth);
     const homePreload = isHome
         ? `<link rel="preload" as="image" href="${root}images/brand/home/lion.jpg" fetchpriority="high"/>`
@@ -233,7 +240,7 @@ function page({ title, description, body, depth = 0, isHome = false, includeSear
         ? `<script>window.STUDIO_ITEMS=${JSON.stringify(allItems).replaceAll("<", "\\u003c")};</script>`
         : "";
     return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${escapeHtml(language)}">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -245,6 +252,7 @@ function page({ title, description, body, depth = 0, isHome = false, includeSear
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;family=Playfair+Display:ital@1&amp;display=swap"/>
     ${homePreload}
     <link rel="stylesheet" href="${root}css/studio.css?v=${stylesheetVersion}"/>
+    ${stylesheet ? `<link rel="stylesheet" href="${root}css/${escapeHtml(stylesheet)}?v=${bookingStylesheetVersion}"/>` : ""}
 </head>
 <body data-root-prefix="${root}">
     <div class="cursor-accent" aria-hidden="true"><span>VIEW</span></div>
@@ -422,6 +430,31 @@ function searchPage() {
 </main>`;
 }
 
+function bookingPage() {
+    const url = escapeHtml(bookingUrl);
+    return `<main class="landing-page booking-page">
+    <section class="booking-section content-section" aria-labelledby="booking-title">
+        <div class="booking-intro">
+            <p class="eyebrow eyebrow--dark">PHOTO BY M · CREATIVE STUDIO</p>
+            <h1 id="booking-title">Rezervă o <em>ședință.</em></h1>
+            <p class="booking-intro__copy">Fiecare poveste merită păstrată. Alege ziua și ora potrivite pentru următoarea ta ședință foto.</p>
+            <a class="booking-intro__link" href="#calendar">ALEGE UN MOMENT <span class="booking-arrow--down" aria-hidden="true">↓</span><span class="booking-arrow--right" aria-hidden="true">→</span></a>
+        </div>
+        <div class="booking-calendar-heading">
+            <div>
+                <p class="eyebrow eyebrow--dark">UN MOMENT PENTRU TINE</p>
+                <h2>Alege ziua <em>potrivită.</em></h2>
+            </div>
+            <p>Selectează un interval disponibil și completează datele în calendarul Google.</p>
+        </div>
+        <div class="booking-calendar__frame" id="calendar">
+            <iframe class="booking-calendar" src="${url}?gv=true&amp;hl=ro" title="Programări foto în Google Calendar" loading="lazy"></iframe>
+        </div>
+        <p class="booking-fallback">Nu se afișează calendarul? <a href="${url}?hl=ro" target="_blank" rel="noopener noreferrer">Deschide pagina de rezervare <span aria-hidden="true">↗</span></a></p>
+    </section>
+</main>`;
+}
+
 async function writePage(relativePath, html) {
     const file = path.join(outputRoot, relativePath);
     await mkdir(path.dirname(file), { recursive: true });
@@ -490,6 +523,15 @@ await writePage("search/index.html", page({
     includeSearchData: true
 }));
 
+await writePage("programari/index.html", page({
+    title: "Rezervă o ședință foto",
+    description: "Programează o ședință foto la Creative Studio Romania.",
+    body: bookingPage(),
+    depth: 1,
+    language: "ro",
+    stylesheet: "booking.css"
+}));
+
 for (const section of ["about", "contact"]) {
     await writePage(`${section}/index.html`, page({
         title: "Coming in the next phase",
@@ -512,4 +554,4 @@ await writePage("404.html", page({
     body: `<main><section class="closing foundation-page"><p class="eyebrow">404 · PAGE NOT FOUND</p><h2>This story<br/><em>isn't here.</em></h2><a class="button button--gold" href="./">RETURN HOME</a></section></main>`
 }));
 
-console.log(`Built ${allItems.length + 8} static pages and copied site assets to dist/.`);
+console.log(`Built ${allItems.length + 9} static pages and copied site assets to dist/.`);

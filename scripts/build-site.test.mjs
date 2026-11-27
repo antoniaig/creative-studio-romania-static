@@ -27,11 +27,13 @@ test("builds a self-contained static site with every current route", async () =>
         "creations/seasonal-atelier/index.html",
         "creations/handmade-accessories/index.html",
         "search/index.html",
+        "programari/index.html",
         "about/index.html",
         "contact/index.html",
         "closet/index.html",
         "404.html",
         "css/studio.css",
+        "css/booking.css",
         "js/app.js",
         "images/brand/home/lion.jpg",
         "images/brand/home/wind-veil.svg",
@@ -72,4 +74,11 @@ test("builds a self-contained static site with every current route", async () =>
     assert.match(detail, /href="\.\.\/\.\.\/css\/studio\.css\?v=[a-f0-9]{12}"/);
     assert.match(detail, /src="\.\.\/\.\.\/images\/brand\/photography\/weddings\.jpg"/);
     assert.match(detail, /class="text-link__icon text-link__icon--leading"><svg class="arrow-icon arrow-icon--left"/);
+
+    const booking = await readFile(path.join(projectRoot, "dist/programari/index.html"), "utf8");
+    assert.match(booking, /<html lang="ro">/);
+    assert.match(booking, /<iframe[^>]+src="https:\/\/calendar\.google\.com\/calendar\/appointments\/schedules\/[^"]+\?gv=true&amp;hl=ro"/);
+    assert.match(booking, /href="https:\/\/calendar\.google\.com\/calendar\/appointments\/schedules\/[^"]+"/);
+    assert.match(home, /href="\.\/programari\/"/);
+    assert.match(detail, /href="\.\.\/\.\.\/programari\/"/);
 });
