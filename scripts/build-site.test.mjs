@@ -55,11 +55,20 @@ test("builds a self-contained static site with every current route", async () =>
     assert.match(home, /<a class="hero-seasonal" href="\.\/programari\/">[\s\S]*?Christmas Photo Shoot[\s\S]*?REZERVĂ ACUM/);
     assert.match(home, /href="\.\/photography\/craciun\/"/);
     assert.match(home, /class="circle-arrow" aria-hidden="true"><svg class="arrow-icon"/);
-    assert.match(home, /class="world-panel__signature-name" aria-hidden="true">GABRIELA<\/span>/);
+    assert.match(home, /class="world-panel world-panel--creations"[\s\S]*?class="coming-soon coming-soon--panel">Coming soon<\/span>/);
+    assert.doesNotMatch(home, /gabriela-watermark\.png/);
     assert.match(home, /href="\.\/css\/studio\.css\?v=[a-f0-9]{12}"/);
     assert.match(home, /rel="preload" as="image" href="\.\/images\/brand\/home\/lion\.jpg" fetchpriority="high"/);
     assert.match(home, /VIEW ALL STORIES <span class="text-link__icon"><svg class="arrow-icon"/);
     assert.match(home, /VIEW ALL COLLECTIONS <span class="text-link__icon"><svg class="arrow-icon"/);
+    assert.match(home, /class="coming-soon-heading"><span class="coming-soon">Coming soon<\/span><\/div>\s*<div class="chapter-grid">/);
+
+    const collections = await readFile(path.join(projectRoot, "dist/creations/index.html"), "utf8");
+    assert.match(collections, /class="coming-soon-heading"><span class="coming-soon">Coming soon<\/span><\/div>\s*<div class="listing-grid">/);
+    for (const slug of ["shop-my-closet", "home-living", "seasonal-atelier", "handmade-accessories"]) {
+        const collection = await readFile(path.join(projectRoot, "dist", "creations", slug, "index.html"), "utf8");
+        assert.match(collection, /class="coming-soon coming-soon--detail">Coming soon<\/p>\s*<h1>/);
+    }
 
     const search = await readFile(path.join(projectRoot, "dist/search/index.html"), "utf8");
     assert.match(search, /data-search-results/);
@@ -71,6 +80,7 @@ test("builds a self-contained static site with every current route", async () =>
     const photography = await readFile(path.join(projectRoot, "dist/photography/index.html"), "utf8");
     assert.match(photography, /class="listing-tile__arrow" aria-hidden="true"><svg class="arrow-icon"/);
     assert.match(photography, /<a class="listing-tile" href="\.\.\/photography\/craciun\/">[\s\S]*?src="\.\.\/images\/brand\/photography\/christmas\/christmas-03\.jpg"[\s\S]*?class="listing-tile__title">Crăciun<\/span>/);
+    assert.doesNotMatch(photography, /class="coming-soon/);
 
     const christmas = await readFile(path.join(projectRoot, "dist/photography/craciun/index.html"), "utf8");
     assert.match(christmas, /href="\.\.\/\.\.\/programari\/"/);

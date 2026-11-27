@@ -34,6 +34,13 @@ img { display: block; max-width: 100%; }
 .eyebrow { margin: 0; font-size: 11px; letter-spacing: .2em; line-height: 1.5; }
 .eyebrow--dark { color: #a37446; }
 
+.coming-soon { display: inline-flex; align-items: center; gap: 8px; padding: 8px 11px; border: 1px solid #d6b58c; color: #62472f; background: #f5e9db; font: 500 9px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+.coming-soon::before { width: 5px; height: 5px; border-radius: 50%; background: #d6b58c; content: ""; }
+.coming-soon-heading { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.coming-soon-heading::before, .coming-soon-heading::after { flex: 1; height: 1px; background: #d6b58c; content: ""; }
+.landing-detail__copy .coming-soon--detail { display: inline-flex; margin: 12px 0 4px; padding: 9px 12px; background: transparent; line-height: 1; }
+.coming-soon--panel { margin-top: 16px; color: #fff8f1; background: #30221be8; }
+
 .site-header { position: relative; z-index: 10; background: #261b16; color: #fff8f1; }
 .site-header--home { position: absolute; inset: 0 0 auto; background: linear-gradient(#261b16cc, transparent); }
 .site-header.is-scrolled { background: #261b16; }
@@ -122,11 +129,6 @@ img { display: block; max-width: 100%; }
 .world-panel__description { margin-top: 10px; font-size: 9px; line-height: 1.46; letter-spacing: .12em; }
 .world-panel__signature { width: min(210px, 85%); height: 75px; margin-top: 10px; }
 .world-panel__signature--photo img { width: 100%; height: 48px; object-fit: contain; object-position: left center; }
-.world-panel__signature--creations { display: block; width: min(300px, calc(100% + 14px)); height: 75px; }
-.world-panel__signature-artwork { position: relative; display: block; width: 100%; aspect-ratio: 4 / 1; }
-.world-panel__signature-artwork img { width: 70%; height: auto; margin-left: 26px; object-fit: contain; object-position: left center; clip-path: inset(0 0 0 52%); transform: translateY(-4px); }
-.world-panel__signature-name { position: absolute; top: 8%; left: 0; color: #fff8f1; font: 300 clamp(17px, calc(6.3vw - 3px), 23px)/1 var(--serif); letter-spacing: .16em; white-space: nowrap; }
-.world-panel__signature-subtitle { position: absolute; top: 41%; left: 0; font: 300 6px/1 var(--sans); letter-spacing: .5em; }
 .world-panel__link { display: flex; align-items: center; gap: 15px; margin-top: 10px; font-size: 10px; letter-spacing: .1em; }
 .circle-arrow, .listing-tile__arrow { display: grid; flex-shrink: 0; width: 34px; height: 34px; place-items: center; border: 1px solid #c9a477; border-radius: 50%; color: #d5b286; transition: color .3s ease, background-color .3s ease, transform .3s ease; }
 .world-panel:hover .circle-arrow, .chapter-tile:hover .circle-arrow, .listing-tile:hover .listing-tile__arrow { background: #c49a64; color: #261b16; }
@@ -231,7 +233,6 @@ img { display: block; max-width: 100%; }
     .hero-preview { position: relative; top: auto; right: auto; align-self: center; width: clamp(190px, 60vw, 260px); }
     .worlds { grid-template-columns: 1fr; margin-top: -100px; }
     .world-panel { min-height: 230px; padding: 24px; }
-    .world-panel__signature-artwork img { width: 75%; margin-left: 18px; }
     .world-panel__title { font-size: 30px; }
     .christmas-feature { grid-template-columns: 1fr; }
     .christmas-feature__image { min-height: 0; }
