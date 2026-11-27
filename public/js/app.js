@@ -190,6 +190,60 @@ videoDialog?.addEventListener("click", (event) => {
 });
 videoDialog?.addEventListener("close", () => studioVideo?.pause());
 
+document.querySelector(".christmas-catalog")?.addEventListener("play", (event) => {
+    event.currentTarget.querySelectorAll(".christmas-gallery__video").forEach((video) => {
+        if (video !== event.target && !video.paused) video.pause();
+    });
+}, true);
+
+document.querySelectorAll(".christmas-gallery__player").forEach((player) => {
+    const video = player.querySelector("video");
+    const play = player.querySelector("[data-gallery-play]");
+    const sound = player.querySelector("[data-gallery-sound]");
+    const title = video.getAttribute("aria-label");
+    let previewing = false;
+
+    function updatePlayback() {
+        const playing = !video.paused && !video.ended;
+        player.toggleAttribute("data-playing", playing);
+        play.setAttribute("aria-label", `${playing ? "Pauză" : "Redă"} ${title}`);
+        if (!playing && document.activeElement === sound) play.focus({ preventScroll: true });
+        sound.hidden = !playing;
+    }
+
+    for (const event of ["play", "pause", "ended"]) {
+        video.addEventListener(event, updatePlayback);
+    }
+    video.addEventListener("volumechange", () => {
+        sound.setAttribute("aria-pressed", String(!video.muted));
+    });
+
+    play.addEventListener("click", () => {
+        previewing = false;
+        if (video.paused || video.ended) video.play().catch(() => {});
+        else video.pause();
+    });
+    sound.addEventListener("click", () => {
+        previewing = false;
+        video.muted = !video.muted;
+    });
+
+    player.addEventListener("pointerenter", (event) => {
+        if (event.pointerType !== "mouse" || reducedMotion.matches || !video.paused) return;
+        previewing = true;
+        video.muted = true;
+        video.play().catch(() => {});
+    });
+    player.addEventListener("pointerleave", (event) => {
+        if (event.pointerType !== "mouse" || !previewing) return;
+        previewing = false;
+        video.pause();
+    });
+
+    video.controls = false;
+    play.hidden = false;
+});
+
 if (!reducedMotion.matches && "IntersectionObserver" in window) {
     document.body.classList.add("motion-ready");
     const revealObserver = new IntersectionObserver((entries, observer) => {

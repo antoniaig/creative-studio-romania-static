@@ -16,18 +16,54 @@ const bookingSessions = [
     { title: "Grand", duration: "3 ore", description: "Ședință foto de Crăciun.", image: "christmas/christmas-160", slug: "craciun-grand" }
 ];
 const bookingBaseUrl = "https://cal.com/antonia-ghiliman-p1v0nm";
-const christmasPhotos = [
-    { file: "gallery-01.jpg", alt: "Mamă și copil într-un decor de Crăciun" },
-    { file: "gallery-02.jpg", alt: "Mâna unui bebeluș ținută de un adult" },
-    { file: "gallery-03.jpg", alt: "Copil cu o acadea într-un decor de Crăciun" },
-    { file: "gallery-04.jpg", alt: "Familie cu un copil într-un decor de Crăciun" },
-    { file: "gallery-05.jpg", alt: "Copil într-un decor de sărbătoare cu lumini" },
-    { file: "gallery-06.jpg", alt: "Viitori părinți într-un decor de Crăciun" },
-    { file: "christmas-pet-portrait.jpg", alt: "Femeie cu un cățel alb într-un decor de Crăciun" },
-    { file: "christmas-pet.jpg", alt: "Femeie cu un cățel într-un decor de Crăciun" },
-    { file: "christmas-baby.jpg", alt: "Bebeluș cu căciulă de Crăciun și ursuleț" },
-    { file: "christmas-160.jpg", alt: "Familie cu un copil într-un decor de Crăciun" }
+const christmas2025 = [
+    { photo: "christmas-06.jpg", alt: "Fetiță lângă șemineul decorat de Crăciun", width: 1200, height: 1800 },
+    { reel: "1" },
+    { photo: "craciun-113.jpg", alt: "Tată ridicând un copil îmbrăcat în roșu lângă brad", width: 1067, height: 1600 },
+    { photo: "gallery-01.jpg", alt: "Mamă și copil într-un decor de Crăciun", width: 1800, height: 1200 },
+    { photo: "craciun-58.jpg", alt: "Două persoane în pulovere roșii cu motive de Crăciun", width: 1600, height: 1067 },
+    { photo: "gallery-02.jpg", alt: "Mâna unui bebeluș ținută de un adult", width: 1800, height: 1200 },
+    { photo: "christmas-07.jpg", alt: "Tată și copil lângă bradul de Crăciun", width: 1800, height: 1200 },
+    { photo: "gallery-03.jpg", alt: "Copil cu o acadea într-un decor de Crăciun", width: 1200, height: 1800 },
+    { photo: "craciun-94.jpg", alt: "Femeie și elf de Crăciun lângă un cadou", width: 1600, height: 1067 },
+    { photo: "gallery-04.jpg", alt: "Familie cu un copil într-un decor de Crăciun", width: 1800, height: 1200 },
+    { photo: "craciun-149.jpg", alt: "Copil întinzând mâna spre o figurină de Moș Crăciun", width: 1600, height: 1067 },
+    { photo: "gallery-05.jpg", alt: "Copil într-un decor de sărbătoare cu lumini", width: 1800, height: 1200 },
+    { photo: "craciun-151.jpg", alt: "Copil strângând în brațe un ursuleț de pluș", width: 1067, height: 1600 },
+    { photo: "gallery-06.jpg", alt: "Viitori părinți într-un decor de Crăciun", width: 1800, height: 1200 },
+    { photo: "craciun-208.jpg", alt: "Fetiță rezemată de cadouri într-un decor luminat de Crăciun", width: 1067, height: 1600 },
+    { photo: "christmas-02.jpg", alt: "Mamă și copil lângă cadouri și luminițe", width: 1800, height: 1200 },
+    { photo: "craciun-242.jpg", alt: "Femeie și copil într-un decor cu globuri argintii", width: 1067, height: 1600 },
+    { photo: "christmas-pet-portrait.jpg", alt: "Femeie cu un cățel alb într-un decor de Crăciun", width: 1200, height: 1800, reel: "DfZ71qNoxxL" },
+    { photo: "craciun-367.jpg", alt: "Femeie cu un cățel lângă un urs de pluș, în decor de Crăciun", width: 1067, height: 1600 },
+    { photo: "christmas-pet.jpg", alt: "Femeie cu un cățel într-un decor de Crăciun", width: 1800, height: 1200 },
+    { photo: "craciun-449.jpg", alt: "Bebeluș sprijinit de un urs mare de pluș", width: 1067, height: 1600 },
+    { photo: "christmas-baby.jpg", alt: "Bebeluș cu căciulă de Crăciun și ursuleț", width: 1200, height: 1800 },
+    { photo: "craciun-17.jpg", alt: "Copil sărutându-și mama pe obraz, cu un ursuleț în brațe", width: 1067, height: 1600 },
+    { photo: "christmas-05.jpg", alt: "Familie cu un copil pe canapea, lângă brad", width: 1800, height: 1200 },
+    { photo: "craciun-280.jpg", alt: "Copil întinzând mâna spre globurile argintii", width: 1067, height: 1600 },
+    { photo: "christmas-160.jpg", alt: "Familie cu un copil într-un decor de Crăciun", width: 1800, height: 1200 },
+    { photo: "craciun-210.jpg", alt: "Fetiță într-un cărucior, lângă cadouri și globuri argintii", width: 1067, height: 1600 },
+    { photo: "christmas-08.jpg", alt: "Cuplu în decorul de Crăciun cu turtă dulce și luminițe", width: 1800, height: 1200 },
+    { photo: "craciun-207.jpg", alt: "Copil îmbrățișând un urs de pluș lângă luminițele de Crăciun", width: 1600, height: 1067 }
 ];
+const christmasEditions = [
+    { year: 2025, items: christmas2025, featuredCount: 3 },
+    {
+        year: 2024,
+        filmsOnly: true,
+        items: [
+            "3", "DC1w8u8MWu3", "DDIDCByK6p7", "DDKXqF4qkxH", "DDPv2_7o1yr", "DDR-UDsIRL_",
+            "DDaBSjmoqjv", "DDcgBsHom6s", "DDhfAj1IJ24", "DD7LTAAo3Jt", "DD9p5HRIA4B", "2"
+        ].map((reel) => ({ reel }))
+    },
+    {
+        year: 2023,
+        filmsOnly: true,
+        items: [{ reel: "DBjWPZkopSE" }, { reel: "C0APmDhMmsC" }]
+    }
+];
+
 const bookingStylesheetVersion = createHash("sha256")
     .update(await readFile(path.join(publicRoot, "css", "booking.css")))
     .digest("hex")
@@ -450,22 +486,63 @@ function homePage() {
 </main>`;
 }
 
+function christmasEditionSection({ year, items, filmsOnly, featuredCount = 0 }) {
+    const imageRoot = "../../images/brand/photography/christmas";
+    const galleryItems = [];
+    let reelNumber = 0;
+    for (const { photo, alt, width, height, reel } of items) {
+        if (photo) {
+            galleryItems.push(`<figure class="christmas-gallery__item"><img src="${imageRoot}/${photo}" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="lazy" decoding="async"/></figure>`);
+        }
+        if (reel) {
+            const stem = `christmas-reel-${reel}`;
+            const title = `Crăciun ${year}, videoclip ${++reelNumber}`;
+            galleryItems.push(`<figure class="christmas-gallery__item christmas-gallery__item--video">
+                <div class="christmas-gallery__player">
+                    <video class="christmas-gallery__video" controls muted playsinline preload="none" poster="${imageRoot}/reels/${stem}.jpg" aria-label="${title}"><source src="../../videos/${stem}.mp4" type="video/mp4"/>${title}</video>
+                    <button class="christmas-gallery__control christmas-gallery__play" type="button" data-gallery-play aria-label="Redă ${title}" hidden></button>
+                    <button class="christmas-gallery__control christmas-gallery__sound" type="button" data-gallery-sound aria-label="Sunet" aria-pressed="false" hidden>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                            <path d="M11 5 6 9H3v6h3l5 4z"/>
+                            <path class="christmas-gallery__sound-on" d="M15 9a4 4 0 0 1 0 6m3-9a8 8 0 0 1 0 12"/>
+                            <path class="christmas-gallery__sound-off" d="m15 9 6 6m0-6-6 6"/>
+                        </svg>
+                    </button>
+                </div>
+                <figcaption class="christmas-gallery__tag" lang="en">Behind the scenes</figcaption>
+            </figure>`);
+        }
+    }
+    const featured = galleryItems.slice(0, featuredCount);
+    return `<section class="christmas-edition" id="craciun-${year}" aria-labelledby="craciun-${year}-title">
+        <h2 id="craciun-${year}-title">Crăciun ${year}</h2>
+        ${featured.length ? `<div class="christmas-gallery__grid christmas-gallery__grid--featured">
+            ${featured.join("\n            ")}
+        </div>` : ""}
+        <div class="christmas-gallery__grid${filmsOnly ? " christmas-gallery__grid--films" : ""}">
+            ${galleryItems.slice(featuredCount).join("\n            ")}
+        </div>
+    </section>`;
+}
+
 function christmasGalleryPage() {
-    const images = christmasPhotos.map((photo) =>
-        `<img src="../../images/brand/photography/christmas/${photo.file}" alt="${escapeHtml(photo.alt)}" loading="lazy" decoding="async"/>`
-    ).join("\n            ");
-    return `<main class="landing-page">
+    return `<main class="landing-page christmas-catalog">
+    <section class="christmas-announcement content-section" aria-labelledby="christmas-announcement-title">
+        <p class="eyebrow">În curând</p>
+        <h2 id="christmas-announcement-title">Decorul de Crăciun 2026 <em>e în pregătire.</em></h2>
+    </section>
     <section class="landing-intro content-section">
         <p class="eyebrow eyebrow--dark">PHOTO BY M · O POVESTE DE IARNĂ</p>
-        <h1>Crăciun în <em>imagini.</em></h1>
+        <h1>Crăciun în <em>imagini și mișcare.</em></h1>
         <p class="landing-intro__summary">Lumini calde, oameni dragi și momente pe care le păstrăm aproape.</p>
     </section>
-    <section class="christmas-gallery content-section" aria-label="Galerie foto de Crăciun">
-        <div class="christmas-gallery__grid">
-            ${images}
-        </div>
+    <nav class="christmas-years content-section" aria-label="Alege ediția de Crăciun">
+        ${christmasEditions.map(({ year }) => `<a href="#craciun-${year}">${year}</a>`).join("\n        ")}
+    </nav>
+    <div class="christmas-gallery content-section">
+        ${christmasEditions.map(christmasEditionSection).join("\n        ")}
         <a class="text-link" href="../../programari/">REZERVĂ O ȘEDINȚĂ <span class="text-link__icon">${arrowIcon()}</span></a>
-    </section>
+    </div>
 </main>`;
 }
 

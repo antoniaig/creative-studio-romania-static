@@ -91,9 +91,53 @@ test("builds a self-contained static site with every current route", async () =>
         assert.ok(christmas.includes(`src="../../images/brand/photography/christmas/${name}"`));
         await assert.doesNotReject(readFile(path.join(projectRoot, "dist/images/brand/photography/christmas", name)));
     }
-    for (const name of ["christmas-pet-portrait.jpg", "christmas-pet.jpg", "christmas-baby.jpg", "christmas-160.jpg"]) {
-        assert.ok(christmas.includes(`src="../../images/brand/photography/christmas/${name}"`));
+    for (const name of [
+        "christmas-pet-portrait.jpg", "christmas-pet.jpg", "christmas-baby.jpg", "christmas-160.jpg",
+        "christmas-02.jpg", "christmas-05.jpg", "christmas-08.jpg",
+        "christmas-06.jpg", "christmas-07.jpg",
+        ...[17, 58, 94, 113, 149, 151, 207, 208, 210, 242, 280, 367, 449].map((number) => `craciun-${number}.jpg`)
+    ]) {
+        const src = `src="../../images/brand/photography/christmas/${name}"`;
+        assert.equal(christmas.split(src).length - 1, 1, name);
         await assert.doesNotReject(readFile(path.join(projectRoot, "dist/images/brand/photography/christmas", name)));
+    }
+    assert.doesNotMatch(christmas, /instagram\.com\/embed\.js|instagram-media|data-instgrm-permalink/);
+    const reelIds = [
+        "1", "DfZ71qNoxxL", "3", "DC1w8u8MWu3", "DDIDCByK6p7", "DDKXqF4qkxH", "DDPv2_7o1yr", "DDR-UDsIRL_",
+        "DDaBSjmoqjv", "DDcgBsHom6s", "DDhfAj1IJ24", "DD7LTAAo3Jt", "DD9p5HRIA4B", "2", "DBjWPZkopSE", "C0APmDhMmsC"
+    ];
+    assert.match(christmas, /În curând[\s\S]*?Decorul de Crăciun 2026/);
+    for (const year of [2025, 2024, 2023]) {
+        assert.ok(christmas.includes(`href="#craciun-${year}">${year}</a>`));
+    }
+    const edition2025 = christmas.match(/<section class="christmas-edition" id="craciun-2025"[\s\S]*?<\/section>/)?.[0] ?? "";
+    const edition2024 = christmas.match(/<section class="christmas-edition" id="craciun-2024"[\s\S]*?<\/section>/)?.[0] ?? "";
+    const edition2023 = christmas.match(/<section class="christmas-edition" id="craciun-2023"[\s\S]*?<\/section>/)?.[0] ?? "";
+    assert.equal((edition2025.match(/<img\b/g) ?? []).length, 28);
+    assert.doesNotMatch(edition2024, /<img\b/);
+    const editionReels = (edition) => Array.from(edition.matchAll(/<source src="\.\.\/\.\.\/videos\/christmas-reel-([^"]+)\.mp4"/g), ([, id]) => id);
+    assert.deepEqual(editionReels(edition2025), ["1", "DfZ71qNoxxL"]);
+    assert.deepEqual(editionReels(edition2024), reelIds.slice(2, -2));
+    assert.deepEqual(editionReels(edition2023), ["DBjWPZkopSE", "C0APmDhMmsC"]);
+    const featured = edition2025.split('class="christmas-gallery__grid christmas-gallery__grid--featured"')[1]?.split('class="christmas-gallery__grid"')[0] ?? "";
+    assert.deepEqual(Array.from(featured.matchAll(/<(img|video)\b/g), ([, type]) => type), ["img", "video", "img"]);
+    assert.deepEqual(editionReels(featured), ["1"]);
+    assert.equal((christmas.match(/>Behind the scenes<\/figcaption>/g) ?? []).length, reelIds.length);
+    assert.doesNotMatch(christmas, /christmas-01\.jpg/);
+    const videos = christmas.match(/<video class="christmas-gallery__video"[^>]*>/g) ?? [];
+    assert.equal(videos.length, reelIds.length);
+    assert.equal((christmas.match(/\bdata-gallery-play\b/g) ?? []).length, reelIds.length);
+    assert.equal((christmas.match(/\bdata-gallery-sound\b/g) ?? []).length, reelIds.length);
+    for (const video of videos) {
+        assert.match(video, /\bcontrols\b.*\bmuted\b.*\bpreload="none"/);
+        assert.doesNotMatch(video, /\bautoplay\b/);
+    }
+    for (const id of reelIds) {
+        const stem = `christmas-reel-${id}`;
+        assert.ok(christmas.includes(`src="../../videos/${stem}.mp4"`));
+        assert.ok(christmas.includes(`poster="../../images/brand/photography/christmas/reels/${stem}.jpg"`));
+        await assert.doesNotReject(readFile(path.join(projectRoot, "dist/videos", `${stem}.mp4`)));
+        await assert.doesNotReject(readFile(path.join(projectRoot, "dist/images/brand/photography/christmas/reels", `${stem}.jpg`)));
     }
 
     const css = await readFile(path.join(projectRoot, "dist/css/studio.css"), "utf8");
