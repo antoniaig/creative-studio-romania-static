@@ -508,7 +508,7 @@ function bookingPage() {
         <div class="booking-calendar__frame" id="calendar">
             <iframe class="booking-calendar" name="booking-calendar" src="${bookingBaseUrl}/${bookingSessions[0].slug}?embed=true" title="Programări foto în Cal.com" loading="lazy"></iframe>
         </div>
-        <p class="booking-fallback">Nu se afișează calendarul? Deschide pagina pentru: ${fallbackLinks}&nbsp;<span aria-hidden="true">↗</span></p>
+        <p class="booking-fallback">Nu se afișează calendarul? Deschide pagina pentru: ${fallbackLinks}&nbsp;<span class="booking-fallback__desktop-arrow" aria-hidden="true">↗</span><svg class="booking-fallback__mobile-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3.5 12.5 12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
     </section>
 </main>
 <script src="../js/booking.js" defer></script>`;
