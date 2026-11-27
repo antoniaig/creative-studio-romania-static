@@ -13,7 +13,7 @@ const stylesheetVersion = createHash("sha256")
 const bookingSessions = [
     { title: "Little", duration: "1 oră", description: "Ședință foto de Crăciun.", image: "christmas/christmas-07", slug: "craciun-little" },
     { title: "Signature", duration: "2 ore", description: "Ședință foto de Crăciun.", image: "christmas/christmas-02", slug: "craciun-signature" },
-    { title: "Grand", duration: "3 ore", description: "Ședință foto de Crăciun.", image: "christmas/christmas-03", slug: "craciun-grand" }
+    { title: "Grand", duration: "3 ore", description: "Ședință foto de Crăciun.", image: "christmas/christmas-160", slug: "craciun-grand" }
 ];
 const bookingBaseUrl = "https://cal.com/antonia-ghiliman-p1v0nm";
 const christmasPhotos = [
@@ -66,7 +66,7 @@ const christmasChapter = {
     title: "Crăciun",
     description: "Momente calde și amintiri de Crăciun.",
     assetFolder: "photography",
-    image: "christmas/christmas-03"
+    image: "christmas/christmas-160"
 };
 
 const creationCollections = [
@@ -421,7 +421,7 @@ function homePage() {
             <a class="text-link" href="${root}photography/craciun/">DESCOPERĂ GALERIA <span class="text-link__icon">${arrowIcon()}</span></a>
         </div>
         <a class="christmas-feature__image" href="${root}photography/craciun/" aria-label="Descoperă galeria foto de Crăciun">
-            <img src="${root}images/brand/photography/christmas/christmas-03.jpg" alt="" loading="lazy"/>
+            <img src="${root}images/brand/photography/christmas/christmas-160.jpg" alt="" loading="lazy"/>
         </a>
     </section>
     <section class="chapters content-section" id="photography-chapters">

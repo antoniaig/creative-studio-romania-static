@@ -54,6 +54,7 @@ test("builds a self-contained static site with every current route", async () =>
     assert.match(home, /class="hero-watch__play" aria-hidden="true"><svg class="play-icon"/);
     assert.match(home, /<a class="hero-seasonal" href="\.\/programari\/">[\s\S]*?Christmas Photo Shoot[\s\S]*?REZERVĂ ACUM/);
     assert.match(home, /href="\.\/photography\/craciun\/"/);
+    assert.match(home, /src="\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg"/);
     assert.match(home, /class="circle-arrow" aria-hidden="true"><svg class="arrow-icon"/);
     assert.match(home, /class="world-panel world-panel--creations"[\s\S]*?class="coming-soon coming-soon--panel">Coming soon<\/span>/);
     assert.doesNotMatch(home, /gabriela-watermark\.png/);
@@ -79,7 +80,7 @@ test("builds a self-contained static site with every current route", async () =>
 
     const photography = await readFile(path.join(projectRoot, "dist/photography/index.html"), "utf8");
     assert.match(photography, /class="listing-tile__arrow" aria-hidden="true"><svg class="arrow-icon"/);
-    assert.match(photography, /<a class="listing-tile" href="\.\.\/photography\/craciun\/">[\s\S]*?src="\.\.\/images\/brand\/photography\/christmas\/christmas-03\.jpg"[\s\S]*?class="listing-tile__title">Crăciun<\/span>/);
+    assert.match(photography, /<a class="listing-tile" href="\.\.\/photography\/craciun\/">[\s\S]*?src="\.\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg"[\s\S]*?class="listing-tile__title">Crăciun<\/span>/);
     assert.doesNotMatch(photography, /class="coming-soon/);
 
     const christmas = await readFile(path.join(projectRoot, "dist/photography/craciun/index.html"), "utf8");
@@ -97,13 +98,14 @@ test("builds a self-contained static site with every current route", async () =>
     const detail = await readFile(path.join(projectRoot, "dist/photography/weddings/index.html"), "utf8");
     assert.match(detail, /href="\.\.\/\.\.\/photography\/"/);
     assert.match(detail, /<a href="\.\.\/\.\.\/photography\/craciun\/">Crăciun<\/a>/);
-    assert.match(detail, /<a class="chapter-tile" href="\.\.\/\.\.\/photography\/craciun\/">\s*<img src="\.\.\/\.\.\/images\/brand\/photography\/christmas\/christmas-03\.jpg" alt="Crăciun"/);
+    assert.match(detail, /<a class="chapter-tile" href="\.\.\/\.\.\/photography\/craciun\/">\s*<img src="\.\.\/\.\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg" alt="Crăciun"/);
     assert.match(detail, /href="\.\.\/\.\.\/css\/studio\.css\?v=[a-f0-9]{12}"/);
     assert.match(detail, /src="\.\.\/\.\.\/images\/brand\/photography\/weddings\.jpg"/);
     assert.match(detail, /class="text-link__icon text-link__icon--leading"><svg class="arrow-icon arrow-icon--left"/);
 
     const booking = await readFile(path.join(projectRoot, "dist/programari/index.html"), "utf8");
     assert.match(booking, /<html lang="ro">/);
+    assert.match(booking, /src="\.\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg"[^>]*\/>[\s\S]*?<strong>Grand<\/strong>/);
     assert.match(booking, /<iframe[^>]+name="booking-calendar"[^>]+src="https:\/\/cal\.com\/antonia-ghiliman-p1v0nm\/craciun-little\?embed=true"/);
     for (const [slug, title, duration] of [["craciun-little", "Little", "1 oră"], ["craciun-signature", "Signature", "2 ore"], ["craciun-grand", "Grand", "3 ore"]]) {
         assert.match(booking, new RegExp(`href="https://cal\\.com/antonia-ghiliman-p1v0nm/${slug}\\?embed=true" target="booking-calendar"`));
