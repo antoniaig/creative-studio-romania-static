@@ -62,6 +62,15 @@ const photographyChapters = [
     }
 ];
 
+const christmasChapter = {
+    slug: "craciun",
+    number: "O POVESTE DE IARNĂ",
+    title: "Crăciun",
+    description: "Momente calde și amintiri de Crăciun.",
+    assetFolder: "photography",
+    image: "christmas/christmas-03"
+};
+
 const creationCollections = [
     {
         slug: "shop-my-closet",
@@ -158,6 +167,7 @@ function header(prefix, isHome) {
                 <div class="nav-dropdown__menu">
                     <a href="${root}photography/">All photography</a>
                     ${photographyChapters.map((item) => `<a href="${root}photography/${item.slug}/">${escapeHtml(item.title)}</a>`).join("\n                    ")}
+                    <a href="${root}photography/${christmasChapter.slug}/">${escapeHtml(christmasChapter.title)}</a>
                     <a href="${root}programari/">Rezervă o ședință</a>
                 </div>
             </details>
@@ -296,7 +306,7 @@ function tile(item, prefix) {
 
 function chapterTile(item, prefix) {
     return `<a class="chapter-tile" href="${escapeHtml(prefix + item.path)}">
-    <img src="${escapeHtml(prefix + `images/brand/${item.assetFolder}/${item.slug}.jpg`)}" alt="${escapeHtml(item.title)}" loading="lazy"/>
+    <img src="${escapeHtml(prefix + `images/brand/${item.assetFolder}/${item.image || item.slug}.jpg`)}" alt="${escapeHtml(item.title)}" loading="lazy"/>
     <span class="chapter-tile__copy"><span class="chapter-tile__number">${escapeHtml(item.number)}</span>
         <span class="chapter-tile__title">${escapeHtml(item.title)}</span></span>
     <span class="circle-arrow" aria-hidden="true">${arrowIcon()}</span>
@@ -321,7 +331,7 @@ function listingPage({ title, eyebrow, description, items, comingSoon = false })
 function detailPage(item, group) {
     const parentPath = group === "photography" ? "photography/" : "creations/";
     const parentLabel = group === "photography" ? "Photo by M" : "The Creations by G";
-    const siblings = (group === "photography" ? photographyChapters : creationCollections)
+    const siblings = (group === "photography" ? [...photographyChapters, christmasChapter] : creationCollections)
         .filter((related) => related.slug !== item.slug)
         .map((related) => ({ ...related, path: `${group}/${related.slug}/` }));
     const depth = 2;
@@ -541,15 +551,7 @@ await writePage("photography/index.html", page({
         description: "Every frame tells a story. Explore the studio's photography chapters.",
         items: [
             ...photographyChapters.map((item) => ({ ...item, path: `photography/${item.slug}/` })),
-            {
-                path: "photography/craciun/",
-                slug: "craciun",
-                number: "O POVESTE DE IARNĂ",
-                title: "Crăciun",
-                description: "Momente calde și amintiri de Crăciun.",
-                assetFolder: "photography",
-                image: "christmas/christmas-03"
-            }
+            { ...christmasChapter, path: `photography/${christmasChapter.slug}/` }
         ]
     }),
     depth: 1
