@@ -401,13 +401,7 @@ function homePage() {
             <span class="world-panel__title">THE CREATIONS <em>by <img class="world-panel__title-initial" src="${root}images/brand/home/gabriela-initial.png" alt="G"/></em></span>
             <span class="world-panel__subtitle">Handmade. Curated. Timeless.</span>
             <span class="world-panel__description">CREATIVE PIECES FOR YOU, YOUR HOME &amp; THE SEASONS.</span>
-            <span class="world-panel__signature world-panel__signature--creations">
-                <span class="world-panel__signature-artwork">
-                    <img src="${root}images/brand/home/gabriela-watermark.png" alt="Gabriela Ghiliman Creations"/>
-                    <span class="world-panel__signature-name" aria-hidden="true">GABRIELA</span>
-                    <span class="world-panel__signature-subtitle" aria-hidden="true">CREATIONS</span>
-                </span>
-            </span>
+            <span class="coming-soon coming-soon--panel">Coming soon</span>
             <span class="world-panel__link">EXPLORE THE COLLECTIONS <span class="circle-arrow" aria-hidden="true">${arrowIcon()}</span></span>
         </a>
     </section>
