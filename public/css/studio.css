@@ -34,6 +34,12 @@ img { display: block; max-width: 100%; }
 .eyebrow { margin: 0; font-size: 11px; letter-spacing: .2em; line-height: 1.5; }
 .eyebrow--dark { color: #a37446; }
 
+.coming-soon { display: inline-flex; align-items: center; gap: 8px; padding: 8px 11px; border: 1px solid #d6b58c; color: #62472f; background: #f5e9db; font: 500 9px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+.coming-soon::before { width: 5px; height: 5px; border-radius: 50%; background: #d6b58c; content: ""; }
+.coming-soon-heading { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.coming-soon-heading::before, .coming-soon-heading::after { flex: 1; height: 1px; background: #d6b58c; content: ""; }
+.landing-detail__copy .coming-soon--detail { display: inline-flex; margin: 12px 0 4px; padding: 9px 12px; background: transparent; line-height: 1; }
+
 .site-header { position: relative; z-index: 10; background: #261b16; color: #fff8f1; }
 .site-header--home { position: absolute; inset: 0 0 auto; background: linear-gradient(#261b16cc, transparent); }
 .site-header.is-scrolled { background: #261b16; }

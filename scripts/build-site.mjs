@@ -91,7 +91,7 @@ const creationCollections = [
         description: "Unique, delicate pieces made with care.",
         assetFolder: "collections"
     }
-];
+].map((item) => ({ ...item, comingSoon: true }));
 
 const allItems = [...photographyChapters, ...creationCollections].map((item) => ({
     ...item,
@@ -303,7 +303,7 @@ function chapterTile(item, prefix) {
 </a>`;
 }
 
-function listingPage({ title, eyebrow, description, items }) {
+function listingPage({ title, eyebrow, description, items, comingSoon = false }) {
     const body = `<main class="landing-page">
     <section class="landing-intro content-section">
         <p class="eyebrow eyebrow--dark">${escapeHtml(eyebrow)}</p>
@@ -311,6 +311,7 @@ function listingPage({ title, eyebrow, description, items }) {
         <p class="landing-intro__summary">${escapeHtml(description)}</p>
     </section>
     <section class="listing-section content-section">
+        ${comingSoon ? `<div class="coming-soon-heading"><span class="coming-soon">Coming soon</span></div>` : ""}
         <div class="listing-grid">${items.map((item) => tile(item, "../")).join("\n            ")}</div>
     </section>
 </main>`;
@@ -332,6 +333,7 @@ function detailPage(item, group) {
         </div>
         <div class="landing-detail__copy">
             <p class="eyebrow eyebrow--dark">${escapeHtml(item.number)}</p>
+            ${item.comingSoon ? `<p class="coming-soon coming-soon--detail">Coming soon</p>` : ""}
             <h1>${escapeHtml(item.title)}</h1>
             <p>${escapeHtml(item.description)}</p>
             <a class="text-link" href="${root}${parentPath}"><span class="text-link__icon text-link__icon--leading">${arrowIcon("left")}</span> BACK TO ${escapeHtml(parentLabel.toUpperCase())}</a>
@@ -432,6 +434,7 @@ function homePage() {
             <div><p class="eyebrow eyebrow--dark">THE CREATIONS BY G · MADE WITH HEART</p><h2>Objects with <em>meaning.</em></h2></div>
             <a class="text-link" href="${root}creations/">VIEW ALL COLLECTIONS <span class="text-link__icon">${arrowIcon()}</span></a>
         </div>
+        ${creationCollections.every((item) => item.comingSoon) ? `<div class="coming-soon-heading"><span class="coming-soon">Coming soon</span></div>` : ""}
         <div class="chapter-grid">${creationCollections.map((item) => chapterTile({ ...item, path: `creations/${item.slug}/` }, root)).join("\n            ")}</div>
     </section>
     <dialog class="video-dialog" id="video-dialog" aria-label="Our studio story">
@@ -554,6 +557,7 @@ await writePage("creations/index.html", page({
         title: "The Creations by G",
         eyebrow: "HANDMADE. CURATED. TIMELESS.",
         description: "A collection of creative pieces for you, your home and the seasons you love.",
+        comingSoon: creationCollections.every((item) => item.comingSoon),
         items: creationCollections.map((item) => ({ ...item, path: `creations/${item.slug}/` }))
     }),
     depth: 1

@@ -48,6 +48,8 @@ variables in the Vercel project settings, then redeploy.
   the static build.
 - Photography chapters and collections are currently maintained in the build
   script. Search runs entirely in the visitor's browser.
+- The collection sections and individual collection pages show "Coming soon".
+  Remove the `comingSoon` flag in the build script when they are ready to launch.
 - The Christmas gallery uses the locally stored, web-optimized photographs in
   `public/images/brand/photography/christmas/`; its photo list and descriptions
   are maintained in `scripts/build-site.mjs`. It does not depend on Google Drive.
