@@ -107,8 +107,10 @@ test("builds a self-contained static site with every current route", async () =>
         "DDaBSjmoqjv", "DDcgBsHom6s", "DDhfAj1IJ24", "DD7LTAAo3Jt", "DD9p5HRIA4B", "2", "DBjWPZkopSE", "C0APmDhMmsC"
     ];
     assert.match(christmas, /Christmas 2026 · Coming soon[\s\S]*?Get ready for <em>a little magic\.<\/em>/);
+    assert.match(christmas, /&amp;family=Great%20Vibes&amp;family=Jost/);
     for (const year of [2025, 2024, 2023]) {
         assert.ok(christmas.includes(`href="#craciun-${year}">${year}</a>`));
+        assert.ok(christmas.includes(`<h2 id="craciun-${year}-title"><span><span class="christmas-edition__name">Crăciun</span> <em>${year}</em></span></h2>`));
     }
     const edition2025 = christmas.match(/<section class="christmas-edition" id="craciun-2025"[\s\S]*?<\/section>/)?.[0] ?? "";
     const edition2024 = christmas.match(/<section class="christmas-edition" id="craciun-2024"[\s\S]*?<\/section>/)?.[0] ?? "";
@@ -120,9 +122,16 @@ test("builds a self-contained static site with every current route", async () =>
     assert.deepEqual(editionReels(edition2024), reelIds.slice(2, -2));
     assert.deepEqual(editionReels(edition2023), ["DBjWPZkopSE", "C0APmDhMmsC"]);
     const announcement = christmas.match(/<section class="christmas-announcement content-section"[\s\S]*?<\/section>/)?.[0] ?? "";
+    const bookingLink = /class="text-link christmas-booking-link" href="\.\.\/\.\.\/programari\/">REZERVĂ ȘEDINȚA FOTO/;
+    for (const section of [announcement, edition2025, edition2024, edition2023]) {
+        assert.match(section, bookingLink);
+    }
     assert.deepEqual(editionReels(announcement), ["1"]);
     assert.match(announcement, /Christmas 2025 · Behind the scenes/);
-    assert.equal((christmas.match(/Behind the scenes<\/figcaption>/g) ?? []).length, reelIds.length);
+    assert.match(announcement, /class="christmas-gallery__player" data-gallery-autoplay>/);
+    assert.equal((christmas.match(/\bdata-gallery-autoplay\b/g) ?? []).length, 1);
+    assert.equal((christmas.match(/Behind the scenes<\/figcaption>/g) ?? []).length, 1);
+    assert.equal((christmas.match(/>Christmas memories<\/figcaption>/g) ?? []).length, reelIds.length - 1);
     assert.doesNotMatch(christmas, /christmas-01\.jpg/);
     const videos = christmas.match(/<video class="christmas-gallery__video"[^>]*>/g) ?? [];
     assert.equal(videos.length, reelIds.length);

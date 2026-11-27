@@ -294,7 +294,7 @@ function footer(prefix) {
 </footer>`;
 }
 
-function page({ title, description, body, depth = 0, isHome = false, includeSearchData = false, language = "en", stylesheet = "" }) {
+function page({ title, description, body, depth = 0, isHome = false, includeSearchData = false, language = "en", stylesheet = "", extraFontFamily = "" }) {
     const root = rootPrefix(depth);
     const homePreload = isHome
         ? `<link rel="preload" as="image" href="${root}images/brand/home/lion.jpg" fetchpriority="high"/>`
@@ -312,7 +312,7 @@ function page({ title, description, body, depth = 0, isHome = false, includeSear
     <title>${escapeHtml(title)} | Creative Studio Romania</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;family=Playfair+Display:ital@1&amp;display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500${extraFontFamily ? `&amp;family=${encodeURIComponent(extraFontFamily)}` : ""}&amp;family=Jost:wght@300;400;500;600&amp;family=Playfair+Display:ital@1&amp;display=swap"/>
     ${homePreload}
     <link rel="stylesheet" href="${root}css/studio.css?v=${stylesheetVersion}"/>
     ${stylesheet ? `<link rel="stylesheet" href="${root}css/${escapeHtml(stylesheet)}?v=${bookingStylesheetVersion}"/>` : ""}
@@ -486,11 +486,11 @@ function homePage() {
 </main>`;
 }
 
-function christmasReel(reel, title, caption = "Behind the scenes") {
+function christmasReel(reel, title, { caption = "Christmas memories", autoplay = false } = {}) {
     const stem = `christmas-reel-${reel}`;
     const label = escapeHtml(title);
     return `<figure class="christmas-gallery__item christmas-gallery__item--video">
-                <div class="christmas-gallery__player">
+                <div class="christmas-gallery__player"${autoplay ? " data-gallery-autoplay" : ""}>
                     <video class="christmas-gallery__video" controls muted playsinline preload="none" poster="../../images/brand/photography/christmas/reels/${stem}.jpg" aria-label="${label}"><source src="../../videos/${stem}.mp4" type="video/mp4"/>${label}</video>
                     <button class="christmas-gallery__control christmas-gallery__play" type="button" data-gallery-play aria-label="Redă ${label}" hidden></button>
                     <button class="christmas-gallery__control christmas-gallery__sound" type="button" data-gallery-sound aria-label="Sunet" aria-pressed="false" hidden>
@@ -505,6 +505,10 @@ function christmasReel(reel, title, caption = "Behind the scenes") {
             </figure>`;
 }
 
+function christmasBookingLink() {
+    return `<a class="text-link christmas-booking-link" href="../../programari/">REZERVĂ ȘEDINȚA FOTO <span class="text-link__icon">${arrowIcon()}</span></a>`;
+}
+
 function christmasEditionSection({ year, items, filmsOnly }) {
     const galleryItems = [];
     let reelNumber = 0;
@@ -517,29 +521,32 @@ function christmasEditionSection({ year, items, filmsOnly }) {
         }
     }
     return `<section class="christmas-edition" id="craciun-${year}" aria-labelledby="craciun-${year}-title">
-        <h2 id="craciun-${year}-title">Crăciun ${year}</h2>
+        <h2 id="craciun-${year}-title"><span><span class="christmas-edition__name">Crăciun</span> <em>${year}</em></span></h2>
         <div class="christmas-gallery__grid${filmsOnly ? " christmas-gallery__grid--films" : ""}">
             ${galleryItems.join("\n            ")}
         </div>
+        ${christmasBookingLink()}
     </section>`;
 }
 
 function christmasGalleryPage() {
     return `<main class="landing-page christmas-catalog">
     <section class="christmas-announcement content-section" aria-labelledby="christmas-announcement-title">
-        <div class="christmas-announcement__copy" lang="en">
-            <p class="eyebrow">Christmas 2026 · Coming soon</p>
-            <h1 id="christmas-announcement-title">Get ready for <em>a little magic.</em></h1>
-            <p class="christmas-announcement__intro">While we prepare this year’s set, take a look back at our 2025 Christmas studio.</p>
+        <div class="christmas-announcement__content">
+            <div lang="en">
+                <p class="eyebrow">Christmas 2026 · Coming soon</p>
+                <h1 id="christmas-announcement-title">Get ready for <em>a little magic.</em></h1>
+                <p class="christmas-announcement__intro">While we prepare this year’s set, take a look back at our 2025 Christmas studio.</p>
+            </div>
+            ${christmasBookingLink()}
         </div>
-        ${christmasReel("1", "Decorul de Crăciun 2025", "Christmas 2025 · Behind the scenes")}
+        ${christmasReel("1", "Decorul de Crăciun 2025", { caption: "Christmas 2025 · Behind the scenes", autoplay: true })}
     </section>
     <nav class="christmas-years content-section" aria-label="Alege ediția de Crăciun">
         ${christmasEditions.map(({ year }) => `<a href="#craciun-${year}">${year}</a>`).join("\n        ")}
     </nav>
     <div class="christmas-gallery content-section">
         ${christmasEditions.map(christmasEditionSection).join("\n        ")}
-        <a class="text-link" href="../../programari/">REZERVĂ O ȘEDINȚĂ <span class="text-link__icon">${arrowIcon()}</span></a>
     </div>
 </main>`;
 }
@@ -668,7 +675,8 @@ await writePage("photography/craciun/index.html", page({
     description: "Descoperă galeria foto de Crăciun Creative Studio Romania.",
     body: christmasGalleryPage(),
     depth: 2,
-    language: "ro"
+    language: "ro",
+    extraFontFamily: "Great Vibes"
 }));
 
 for (const item of creationCollections) {

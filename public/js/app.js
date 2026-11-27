@@ -201,7 +201,9 @@ document.querySelectorAll(".christmas-gallery__player").forEach((player) => {
     const play = player.querySelector("[data-gallery-play]");
     const sound = player.querySelector("[data-gallery-sound]");
     const title = video.getAttribute("aria-label");
+    const autoplay = player.hasAttribute("data-gallery-autoplay");
     let previewing = false;
+    let soundChanged = false;
 
     function updatePlayback() {
         const playing = !video.paused && !video.ended;
@@ -218,13 +220,21 @@ document.querySelectorAll(".christmas-gallery__player").forEach((player) => {
         sound.setAttribute("aria-pressed", String(!video.muted));
     });
 
-    play.addEventListener("click", () => {
+    player.addEventListener("click", (event) => {
+        const touchPlayback = !autoplay && (event.pointerType === "touch" || !finePointer.matches);
+        if (event.target !== play && !(touchPlayback && event.target === video)) return;
+
         previewing = false;
-        if (video.paused || video.ended) video.play().catch(() => {});
-        else video.pause();
+        if (video.paused || video.ended) {
+            if (touchPlayback && !soundChanged) video.muted = false;
+            video.play().catch(() => {});
+        } else {
+            video.pause();
+        }
     });
     sound.addEventListener("click", () => {
         previewing = false;
+        soundChanged = true;
         video.muted = !video.muted;
     });
 
@@ -242,6 +252,15 @@ document.querySelectorAll(".christmas-gallery__player").forEach((player) => {
 
     video.controls = false;
     play.hidden = false;
+
+    if (autoplay && !reducedMotion.matches) {
+        video.muted = false;
+        video.play().catch((error) => {
+            if (error.name !== "NotAllowedError" || !video.paused) return;
+            video.muted = true;
+            video.play().catch(() => {});
+        });
+    }
 });
 
 if (!reducedMotion.matches && "IntersectionObserver" in window) {
