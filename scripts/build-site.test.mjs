@@ -80,7 +80,7 @@ test("builds a self-contained static site with every current route", async () =>
 
     const photography = await readFile(path.join(projectRoot, "dist/photography/index.html"), "utf8");
     assert.match(photography, /class="listing-tile__arrow" aria-hidden="true"><svg class="arrow-icon"/);
-    assert.match(photography, /<a class="listing-tile" href="\.\.\/photography\/craciun\/">[\s\S]*?src="\.\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg"[\s\S]*?class="listing-tile__title">Crăciun<\/span>/);
+    assert.match(photography, /<a class="listing-tile" href="\.\.\/photography\/craciun\/">[\s\S]*?src="\.\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg"[\s\S]*?class="listing-tile__title">Atelierul lui Moș Crăciun<\/span>/);
     assert.doesNotMatch(photography, /class="coming-soon/);
 
     const christmas = await readFile(path.join(projectRoot, "dist/photography/craciun/index.html"), "utf8");
@@ -147,6 +147,7 @@ test("builds a self-contained static site with every current route", async () =>
     assert.match(detail, /href="\.\.\/\.\.\/photography\/"/);
     assert.match(detail, /<a href="\.\.\/\.\.\/photography\/craciun\/">Crăciun<\/a>/);
     assert.match(detail, /<a class="chapter-tile" href="\.\.\/\.\.\/photography\/craciun\/">\s*<img src="\.\.\/\.\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg" alt="Crăciun"/);
+    assert.match(detail, /class="chapter-tile__title">Atelierul lui Moș Crăciun<\/span>/);
     assert.match(detail, /href="\.\.\/\.\.\/css\/studio\.css\?v=[a-f0-9]{12}"/);
     assert.match(detail, /src="\.\.\/\.\.\/images\/brand\/photography\/weddings\.jpg"/);
     assert.match(detail, /class="text-link__icon text-link__icon--leading"><svg class="arrow-icon arrow-icon--left"/);

@@ -103,6 +103,7 @@ const christmasChapter = {
     slug: "craciun",
     number: "O POVESTE DE IARNĂ",
     title: "Crăciun",
+    cardTitle: "Atelierul lui Moș Crăciun",
     description: "Momente calde și amintiri de Crăciun.",
     assetFolder: "photography",
     image: "christmas/christmas-160"
@@ -335,7 +336,7 @@ function tile(item, prefix) {
         <img src="${escapeHtml(prefix + `images/brand/${item.assetFolder}/${item.image || item.slug}.jpg`)}" alt="${escapeHtml(item.title + " editorial cover")}" loading="lazy"/>
     </span>
     <span class="listing-tile__number">${escapeHtml(item.number)}</span>
-    <span class="listing-tile__title">${escapeHtml(item.title)}</span>
+    <span class="listing-tile__title">${escapeHtml(item.cardTitle ?? item.title)}</span>
     <span class="listing-tile__description">${escapeHtml(item.description)}</span>
     <span class="listing-tile__arrow" aria-hidden="true">${arrowIcon()}</span>
 </a>`;
@@ -345,7 +346,7 @@ function chapterTile(item, prefix) {
     return `<a class="chapter-tile" href="${escapeHtml(prefix + item.path)}">
     <img src="${escapeHtml(prefix + `images/brand/${item.assetFolder}/${item.image || item.slug}.jpg`)}" alt="${escapeHtml(item.title)}" loading="lazy"/>
     <span class="chapter-tile__copy"><span class="chapter-tile__number">${escapeHtml(item.number)}</span>
-        <span class="chapter-tile__title">${escapeHtml(item.title)}</span></span>
+        <span class="chapter-tile__title">${escapeHtml(item.cardTitle ?? item.title)}</span></span>
     <span class="circle-arrow" aria-hidden="true">${arrowIcon()}</span>
 </a>`;
 }
