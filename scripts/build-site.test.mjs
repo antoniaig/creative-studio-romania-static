@@ -112,7 +112,7 @@ test("builds a self-contained static site with every current route", async () =>
     ];
     assert.match(christmas, /Christmas 2026 · Coming soon[\s\S]*?Get ready for <em>a little magic\.<\/em>/);
     assert.match(christmas, /&amp;family=Great%20Vibes&amp;family=Jost/);
-    assert.match(christmas, /<main class="landing-page christmas-catalog">\s*<nav class="christmas-years content-section"[^>]*>\s*<a href="#craciun-2023">2023<\/a>\s*<a href="#craciun-2024">2024<\/a>\s*<a href="#craciun-2025">2025<\/a>\s*<\/nav>/);
+    assert.match(christmas, /<\/section>\s*<nav class="christmas-years content-section"[^>]*>\s*<a href="#craciun-2023">2023<\/a>\s*<a href="#craciun-2024">2024<\/a>\s*<a href="#craciun-2025">2025<\/a>\s*<\/nav>\s*<div class="christmas-gallery content-section">\s*<section class="christmas-edition" id="craciun-2025"/);
     for (const year of [2025, 2024, 2023]) {
         assert.ok(christmas.includes(`<h2 id="craciun-${year}-title"><span><span class="christmas-edition__name">Crăciun</span> <em>${year}</em></span></h2>`));
     }

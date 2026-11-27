@@ -148,6 +148,7 @@ img { display: block; max-width: 100%; }
 .christmas-feature__copy > p:not(.eyebrow) { margin: 18px 0 25px; line-height: 1.7; }
 .christmas-feature__image { align-self: stretch; min-height: 280px; overflow: hidden; background: #e9dacb; }
 .christmas-feature__image img { width: 100%; height: 100%; object-fit: contain; }
+.christmas-catalog { padding-top: clamp(20px, 4vw, 44px); }
 .christmas-announcement { display: grid; grid-template-columns: minmax(0, 1fr) minmax(185px, 265px); align-items: center; gap: clamp(24px, 6vw, 78px); width: min(89%, 1060px); margin-bottom: clamp(24px, 4vw, 48px); padding: clamp(24px, 4vw, 48px); border: 1px solid #dfc7ad; background: radial-gradient(ellipse at 18% 35%, #fffaf0, #f2e0ca); }
 .christmas-announcement__content { display: grid; grid-template-rows: 1fr auto; align-self: stretch; align-items: center; justify-items: start; gap: 22px; }
 .christmas-announcement .eyebrow { display: flex; align-items: center; gap: 10px; color: #78542f; text-transform: uppercase; }
@@ -157,7 +158,7 @@ img { display: block; max-width: 100%; }
 .christmas-announcement__intro { max-width: 36ch; margin: 0; line-height: 1.65; }
 .christmas-announcement .christmas-gallery__item { margin: 0; overflow: hidden; border: 1px solid #bc9877; border-radius: 6px; box-shadow: 0 12px 25px #50301b22; }
 .christmas-announcement .christmas-gallery__tag { text-align: center; }
-.christmas-years { position: sticky; top: 0; z-index: 5; display: flex; justify-content: center; gap: 10px; margin-bottom: clamp(20px, 4vw, 44px); padding: 12px 0; border-block: 1px solid #ddc4ac; background: var(--cream); }
+.christmas-years { position: sticky; top: 0; z-index: 5; display: flex; justify-content: center; gap: 10px; padding: 12px 0; border-block: 1px solid #ddc4ac; background: var(--cream); }
 .christmas-years a { padding: 7px 22px; border: 1px solid #bc9877; border-radius: 999px; font-size: 14px; }
 .christmas-years a:hover, .christmas-years a:focus-visible { background: #3c2521; color: #fff4e4; }
 .christmas-gallery { padding-bottom: 80px; text-align: center; }

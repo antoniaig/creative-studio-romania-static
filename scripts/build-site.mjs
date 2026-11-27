@@ -537,9 +537,6 @@ function christmasEditionSection({ year, items, filmsOnly }) {
 
 function christmasGalleryPage() {
     return `<main class="landing-page christmas-catalog">
-    <nav class="christmas-years content-section" aria-label="Alege ediția de Crăciun">
-        ${[...christmasEditions].reverse().map(({ year }) => `<a href="#craciun-${year}">${year}</a>`).join("\n        ")}
-    </nav>
     <section class="christmas-announcement content-section" aria-labelledby="christmas-announcement-title">
         <div class="christmas-announcement__content">
             <div lang="en">
@@ -551,6 +548,9 @@ function christmasGalleryPage() {
         </div>
         ${christmasReel("1", "Decorul de Crăciun 2025", { caption: "Christmas 2025 · Behind the scenes", autoplay: true })}
     </section>
+    <nav class="christmas-years content-section" aria-label="Alege ediția de Crăciun">
+        ${[...christmasEditions].reverse().map(({ year }) => `<a href="#craciun-${year}">${year}</a>`).join("\n        ")}
+    </nav>
     <div class="christmas-gallery content-section">
         ${christmasEditions.map(christmasEditionSection).join("\n        ")}
     </div>
