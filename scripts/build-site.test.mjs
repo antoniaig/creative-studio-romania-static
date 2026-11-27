@@ -84,8 +84,9 @@ test("builds a self-contained static site with every current route", async () =>
 
     const christmas = await readFile(path.join(projectRoot, "dist/photography/craciun/index.html"), "utf8");
     assert.match(christmas, /href="\.\.\/\.\.\/programari\/"/);
-    for (let i = 1; i <= 8; i++) {
-        const name = `christmas-${String(i).padStart(2, "0")}.jpg`;
+    assert.equal((christmas.match(/src="\.\.\/\.\.\/images\/brand\/photography\/christmas\/gallery-/g) || []).length, 6);
+    for (let i = 1; i <= 6; i++) {
+        const name = `gallery-${String(i).padStart(2, "0")}.jpg`;
         assert.ok(christmas.includes(`src="../../images/brand/photography/christmas/${name}"`));
         await assert.doesNotReject(readFile(path.join(projectRoot, "dist/images/brand/photography/christmas", name)));
     }

@@ -17,14 +17,12 @@ const bookingSessions = [
 ];
 const bookingBaseUrl = "https://cal.com/antonia-ghiliman-p1v0nm";
 const christmasPhotos = [
-    { file: "christmas-01.jpg", alt: "Decor de Crăciun cu brad și fotoliu roșu" },
-    { file: "christmas-02.jpg", alt: "Mamă și copil într-un decor de sărbătoare cu lumini" },
-    { file: "christmas-03.jpg", alt: "Familie cu un copil în decorul de Crăciun" },
-    { file: "christmas-04.jpg", alt: "Portret de bebeluș într-un decor cu lumini de Crăciun" },
-    { file: "christmas-05.jpg", alt: "Familie împreună în decorul de Crăciun" },
-    { file: "christmas-06.jpg", alt: "Portret de copil lângă bradul de Crăciun" },
-    { file: "christmas-07.jpg", alt: "Tată și copil într-un decor de sărbătoare" },
-    { file: "christmas-08.jpg", alt: "Mamă și copil îmbrățișați într-un decor de Crăciun" }
+    { file: "gallery-01.jpg", alt: "Mamă și copil într-un decor de Crăciun" },
+    { file: "gallery-02.jpg", alt: "Mâna unui bebeluș ținută de un adult" },
+    { file: "gallery-03.jpg", alt: "Copil cu o acadea într-un decor de Crăciun" },
+    { file: "gallery-04.jpg", alt: "Familie cu un copil într-un decor de Crăciun" },
+    { file: "gallery-05.jpg", alt: "Copil într-un decor de sărbătoare cu lumini" },
+    { file: "gallery-06.jpg", alt: "Viitori părinți într-un decor de Crăciun" }
 ];
 const bookingStylesheetVersion = createHash("sha256")
     .update(await readFile(path.join(publicRoot, "css", "booking.css")))
