@@ -11,8 +11,8 @@ const stylesheetVersion = createHash("sha256")
     .digest("hex")
     .slice(0, 12);
 const bookingSessions = [
-    { title: "Little", duration: "1 oră", description: "Ședință foto de Crăciun.", image: "christmas/christmas-07", slug: "craciun-little" },
-    { title: "Signature", duration: "2 ore", description: "Ședință foto de Crăciun.", image: "christmas/christmas-02", slug: "craciun-signature" },
+    { title: "Little", duration: "1 oră", description: "Ședință foto de Crăciun.", image: "christmas/christmas-pet-portrait", slug: "craciun-little" },
+    { title: "Signature", duration: "2 ore", description: "Ședință foto de Crăciun.", image: "christmas/christmas-baby", slug: "craciun-signature" },
     { title: "Grand", duration: "3 ore", description: "Ședință foto de Crăciun.", image: "christmas/christmas-160", slug: "craciun-grand" }
 ];
 const bookingBaseUrl = "https://cal.com/antonia-ghiliman-p1v0nm";
@@ -22,7 +22,11 @@ const christmasPhotos = [
     { file: "gallery-03.jpg", alt: "Copil cu o acadea într-un decor de Crăciun" },
     { file: "gallery-04.jpg", alt: "Familie cu un copil într-un decor de Crăciun" },
     { file: "gallery-05.jpg", alt: "Copil într-un decor de sărbătoare cu lumini" },
-    { file: "gallery-06.jpg", alt: "Viitori părinți într-un decor de Crăciun" }
+    { file: "gallery-06.jpg", alt: "Viitori părinți într-un decor de Crăciun" },
+    { file: "christmas-pet-portrait.jpg", alt: "Femeie cu un cățel alb într-un decor de Crăciun" },
+    { file: "christmas-pet.jpg", alt: "Femeie cu un cățel într-un decor de Crăciun" },
+    { file: "christmas-baby.jpg", alt: "Bebeluș cu căciulă de Crăciun și ursuleț" },
+    { file: "christmas-160.jpg", alt: "Familie cu un copil într-un decor de Crăciun" }
 ];
 const bookingStylesheetVersion = createHash("sha256")
     .update(await readFile(path.join(publicRoot, "css", "booking.css")))

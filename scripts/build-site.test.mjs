@@ -91,6 +91,10 @@ test("builds a self-contained static site with every current route", async () =>
         assert.ok(christmas.includes(`src="../../images/brand/photography/christmas/${name}"`));
         await assert.doesNotReject(readFile(path.join(projectRoot, "dist/images/brand/photography/christmas", name)));
     }
+    for (const name of ["christmas-pet-portrait.jpg", "christmas-pet.jpg", "christmas-baby.jpg", "christmas-160.jpg"]) {
+        assert.ok(christmas.includes(`src="../../images/brand/photography/christmas/${name}"`));
+        await assert.doesNotReject(readFile(path.join(projectRoot, "dist/images/brand/photography/christmas", name)));
+    }
 
     const css = await readFile(path.join(projectRoot, "dist/css/studio.css"), "utf8");
     assert.match(css, /@media \(max-width: 700px\) \{[\s\S]*?\.circle-arrow, \.listing-tile__arrow \{ width: auto; height: auto; border: 0;/);
@@ -105,6 +109,8 @@ test("builds a self-contained static site with every current route", async () =>
 
     const booking = await readFile(path.join(projectRoot, "dist/programari/index.html"), "utf8");
     assert.match(booking, /<html lang="ro">/);
+    assert.match(booking, /src="\.\.\/images\/brand\/photography\/christmas\/christmas-pet-portrait\.jpg"[^>]*\/>[\s\S]*?<strong>Little<\/strong>/);
+    assert.match(booking, /src="\.\.\/images\/brand\/photography\/christmas\/christmas-baby\.jpg"[^>]*\/>[\s\S]*?<strong>Signature<\/strong>/);
     assert.match(booking, /src="\.\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg"[^>]*\/>[\s\S]*?<strong>Grand<\/strong>/);
     assert.match(booking, /<iframe[^>]+name="booking-calendar"[^>]+src="https:\/\/cal\.com\/antonia-ghiliman-p1v0nm\/craciun-little\?embed=true"/);
     for (const [slug, title, duration] of [["craciun-little", "Little", "1 oră"], ["craciun-signature", "Signature", "2 ore"], ["craciun-grand", "Grand", "3 ore"]]) {

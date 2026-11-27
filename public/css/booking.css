@@ -47,6 +47,7 @@
 .booking-sessions {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
     gap: 12px;
     margin-bottom: 32px;
 }
@@ -68,9 +69,6 @@
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 3 / 2;
-    object-fit: contain;
-    background: #e9dacb;
 }
 
 .booking-session__body { display: grid; gap: 6px; padding: 15px; }
