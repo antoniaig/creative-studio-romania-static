@@ -188,8 +188,9 @@ img { display: block; max-width: 100%; }
 .christmas-gallery__control { position: absolute; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid #fff4e4b3; border-radius: 50%; background: #261b16c9; color: #fff4e4; }
 .christmas-gallery__control[hidden] { display: none; }
 .christmas-gallery__control:hover { background: #261b16; }
-.christmas-gallery__play { top: 50%; left: 50%; width: 58px; height: 58px; transform: translate(-50%, -50%); }
-.christmas-gallery__play::before { margin-left: 4px; border: 9px solid transparent; border-right: 0; border-left: 14px solid currentColor; content: ""; }
+.christmas-gallery__play { top: 50%; left: 50%; width: 58px; height: 58px; transform: translate(-50%, -50%); border-color: transparent; background: transparent; }
+.christmas-gallery__play:hover { background: transparent; }
+.christmas-gallery__play::before { margin-left: 4px; border: 9px solid transparent; border-right: 0; border-left: 14px solid currentColor; filter: drop-shadow(0 1px 3px #000b); content: ""; }
 .christmas-gallery__player[data-playing] .christmas-gallery__play::before { width: 12px; height: 16px; margin: 0; border: 0; border-inline: 4px solid currentColor; }
 .christmas-gallery__sound { right: 10px; bottom: 10px; }
 .christmas-gallery__sound svg { width: 21px; height: 21px; }
@@ -273,6 +274,8 @@ img { display: block; max-width: 100%; }
 }
 @media (max-width: 700px) {
     .content-section { width: 90%; }
+    .christmas-years { gap: 8px; }
+    .christmas-years a { padding: 6px 18px; font-size: 13px; }
     .brand-name { font-size: 13px; }
     .home-hero, .hero-inner { min-height: max(800px, 100vh); min-height: max(800px, 100svh); }
     .home-page::before { background-position: center, 45% center; }
