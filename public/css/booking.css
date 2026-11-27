@@ -44,6 +44,39 @@
     padding: 22px 0 60px;
 }
 
+.booking-sessions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.booking-session {
+    overflow: hidden;
+    border: 1px solid #e0cdb8;
+    border-radius: 10px;
+    background: #fffaf5;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.booking-session:hover, .booking-session[aria-current="true"] {
+    border-color: #a37446;
+    box-shadow: 0 8px 25px #51351b18;
+}
+
+.booking-session img {
+    display: block;
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+}
+
+.booking-session__body { display: grid; gap: 6px; padding: 15px; }
+.booking-session__body strong { font: 500 25px/1.1 var(--serif); }
+.booking-session__body > span:not(.booking-session__duration):not(.booking-session__action) { font-size: 12px; line-height: 1.5; }
+.booking-session__duration, .booking-session__action { color: #825a35; font-size: 10px; letter-spacing: .1em; }
+.booking-session__action { margin-top: 6px; }
+
 .booking-calendar-heading {
     display: flex;
     justify-content: space-between;
@@ -110,7 +143,7 @@
     }
 
     .booking-intro {
-        grid-row: 1 / 4;
+        grid-row: 1 / 5;
         margin-bottom: 0;
         padding-top: 36px;
         text-align: left;
@@ -124,13 +157,16 @@
     .booking-intro__copy { margin: 0; }
     .booking-arrow--down { display: none; }
     .booking-arrow--right { display: inline; }
-    .booking-calendar-heading, .booking-calendar__frame, .booking-fallback { grid-column: 2; }
+    .booking-sessions, .booking-calendar-heading, .booking-calendar__frame, .booking-fallback { grid-column: 2; }
     .booking-calendar { height: clamp(500px, calc(100vh - 240px), 700px); }
     .booking-fallback { margin-top: 8px; }
 }
 
 @media (max-width: 700px) {
     .booking-section { padding: 30px 0 65px; }
+    .booking-sessions { grid-template-columns: 1fr; }
+    .booking-session { display: grid; grid-template-columns: 110px 1fr; }
+    .booking-session img { height: 100%; min-height: 120px; }
     .booking-calendar-heading { align-items: start; flex-direction: column; gap: 8px; }
     .booking-calendar { height: 850px; }
 }

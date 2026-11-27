@@ -35,7 +35,9 @@ test("builds a self-contained static site with every current route", async () =>
         "css/studio.css",
         "css/booking.css",
         "js/app.js",
+        "js/booking.js",
         "images/brand/home/lion.jpg",
+        "images/brand/home/christmas-pexels.jpg",
         "images/brand/home/wind-veil.svg",
         "videos/studio-story.mp4"
     ];
@@ -49,6 +51,7 @@ test("builds a self-contained static site with every current route", async () =>
     assert.match(home, /id="video-dialog"/);
     assert.match(home, /class="home-veil" aria-hidden="true"/);
     assert.match(home, /class="hero-watch__play" aria-hidden="true"><svg class="play-icon"/);
+    assert.match(home, /<a class="hero-seasonal" href="\.\/programari\/">[\s\S]*?Christmas Photo Shoot[\s\S]*?REZERVĂ ACUM/);
     assert.match(home, /class="circle-arrow" aria-hidden="true"><svg class="arrow-icon"/);
     assert.match(home, /class="world-panel__signature-name" aria-hidden="true">GABRIELA<\/span>/);
     assert.match(home, /href="\.\/css\/studio\.css\?v=[a-f0-9]{12}"/);
@@ -77,8 +80,11 @@ test("builds a self-contained static site with every current route", async () =>
 
     const booking = await readFile(path.join(projectRoot, "dist/programari/index.html"), "utf8");
     assert.match(booking, /<html lang="ro">/);
-    assert.match(booking, /<iframe[^>]+src="https:\/\/calendar\.google\.com\/calendar\/appointments\/schedules\/[^"]+\?gv=true&amp;hl=ro"/);
-    assert.match(booking, /href="https:\/\/calendar\.google\.com\/calendar\/appointments\/schedules\/[^"]+"/);
+    assert.match(booking, /<iframe[^>]+name="booking-calendar"[^>]+src="https:\/\/cal\.com\/antonia-ghiliman-p1v0nm\/sedinta-foto-portret\?embed=true"/);
+    for (const slug of ["sedinta-foto-portret", "sedinta-foto-cuplu", "sedinta-foto-familie"]) {
+        assert.match(booking, new RegExp(`href="https://cal\\.com/antonia-ghiliman-p1v0nm/${slug}\\?embed=true" target="booking-calendar"`));
+        assert.match(booking, new RegExp(`href="https://cal\\.com/antonia-ghiliman-p1v0nm/${slug}" target="_blank"`));
+    }
     assert.match(home, /href="\.\/programari\/"/);
     assert.match(detail, /href="\.\.\/\.\.\/programari\/"/);
 });

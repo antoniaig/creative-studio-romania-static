@@ -10,7 +10,12 @@ const stylesheetVersion = createHash("sha256")
     .update(await readFile(path.join(publicRoot, "css", "studio.css")))
     .digest("hex")
     .slice(0, 12);
-const bookingUrl = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2JSIH-buLqWMsW9BYB1pw-doO_SmgJWroP4uNmlQ4QWT3q0fylHDuTPLnKjjlF8FLhoFNwsXBN";
+const bookingSessions = [
+    { title: "Portret", duration: "60 min", description: "Un moment doar pentru tine.", image: "portraits", slug: "sedinta-foto-portret" },
+    { title: "Cuplu", duration: "90 min", description: "Povestea voastră, în imagini.", image: "weddings", slug: "sedinta-foto-cuplu" },
+    { title: "Familie", duration: "90 min", description: "Amintiri împreună, de păstrat.", image: "family", slug: "sedinta-foto-familie" }
+];
+const bookingBaseUrl = "https://cal.com/antonia-ghiliman-p1v0nm";
 const bookingStylesheetVersion = createHash("sha256")
     .update(await readFile(path.join(publicRoot, "css", "booking.css")))
     .digest("hex")
@@ -353,6 +358,10 @@ function homePage() {
                     <a class="button button--gold" href="#studio-worlds">EXPLORE THE STUDIO <span class="button__icon">${arrowIcon()}</span></a>
                     <a class="button button--outline" href="${root}about/">OUR STORY</a>
                 </div>
+                <a class="hero-seasonal" href="${root}programari/">
+                    <span><span class="hero-seasonal__label">O POVESTE DE IARNĂ</span><strong lang="en">Christmas Photo Shoot</strong></span>
+                    <span class="hero-seasonal__action">REZERVĂ ACUM <span aria-hidden="true">→</span></span>
+                </a>
             </div>
             <div class="hero-preview">
                 <span class="hero-preview__image hero-preview__image--photo" aria-hidden="true"></span>
@@ -431,28 +440,41 @@ function searchPage() {
 }
 
 function bookingPage() {
-    const url = escapeHtml(bookingUrl);
+    const cards = bookingSessions.map((session) => {
+        const url = `${bookingBaseUrl}/${session.slug}`;
+        return `<a class="booking-session" href="${url}?embed=true" target="booking-calendar" data-booking-session>
+                <img src="../images/brand/photography/${session.image}.jpg" alt="" loading="lazy"/>
+                <span class="booking-session__body"><span class="booking-session__duration">${session.duration}</span><strong>${session.title}</strong><span>${session.description}</span><span class="booking-session__action">ALEGE ȘEDINȚA <span aria-hidden="true">→</span></span></span>
+            </a>`;
+    }).join("\n            ");
+    const fallbackLinks = bookingSessions.map((session) =>
+        `<a href="${bookingBaseUrl}/${session.slug}" target="_blank" rel="noopener noreferrer">${session.title}</a>`
+    ).join(" · ");
     return `<main class="landing-page booking-page">
     <section class="booking-section content-section" aria-labelledby="booking-title">
         <div class="booking-intro">
             <p class="eyebrow eyebrow--dark">PHOTO BY M · CREATIVE STUDIO</p>
             <h1 id="booking-title">Rezervă o <em>ședință.</em></h1>
             <p class="booking-intro__copy">Fiecare poveste merită păstrată. Alege ziua și ora potrivite pentru următoarea ta ședință foto.</p>
-            <a class="booking-intro__link" href="#calendar">ALEGE UN MOMENT <span class="booking-arrow--down" aria-hidden="true">↓</span><span class="booking-arrow--right" aria-hidden="true">→</span></a>
+            <a class="booking-intro__link" href="#sedinte">ALEGE UN MOMENT <span class="booking-arrow--down" aria-hidden="true">↓</span><span class="booking-arrow--right" aria-hidden="true">→</span></a>
+        </div>
+        <div class="booking-sessions" id="sedinte" aria-label="Tipuri de ședințe foto">
+            ${cards}
         </div>
         <div class="booking-calendar-heading">
             <div>
                 <p class="eyebrow eyebrow--dark">UN MOMENT PENTRU TINE</p>
                 <h2>Alege ziua <em>potrivită.</em></h2>
             </div>
-            <p>Selectează un interval disponibil și completează datele în calendarul Google.</p>
+            <p>Alege ședința, apoi selectează un interval disponibil în calendar.</p>
         </div>
         <div class="booking-calendar__frame" id="calendar">
-            <iframe class="booking-calendar" src="${url}?gv=true&amp;hl=ro" title="Programări foto în Google Calendar" loading="lazy"></iframe>
+            <iframe class="booking-calendar" name="booking-calendar" src="${bookingBaseUrl}/${bookingSessions[0].slug}?embed=true" title="Programări foto în Cal.com" loading="lazy"></iframe>
         </div>
-        <p class="booking-fallback">Nu se afișează calendarul? <a href="${url}?hl=ro" target="_blank" rel="noopener noreferrer">Deschide pagina de rezervare <span aria-hidden="true">↗</span></a></p>
+        <p class="booking-fallback">Nu se afișează calendarul? Deschide pagina pentru: ${fallbackLinks} <span aria-hidden="true">↗</span></p>
     </section>
-</main>`;
+</main>
+<script src="../js/booking.js" defer></script>`;
 }
 
 async function writePage(relativePath, html) {

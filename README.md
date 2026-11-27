@@ -50,11 +50,13 @@ variables in the Vercel project settings, then redeploy.
   script. Search runs entirely in the visitor's browser.
 - The newsletter link directs visitors to Contact; subscription storage and
   delivery are not implemented.
-- `programari/` embeds the Google Calendar appointment schedule. Edit the
-  `bookingUrl` in `scripts/build-site.mjs` if the booking page changes.
-  Availability, duration, booking fields and cancellations are managed in
-  Google Calendar; no custom booking backend or online payments are included.
+- `programari/` embeds the Cal.com booking pages listed in `bookingSessions`
+  in `scripts/build-site.mjs`. Availability, duration, booking fields and
+  cancellations are managed in Cal.com, with Google Calendar connected; no
+  custom booking backend or online payments are included.
 
 Homepage and listing imagery includes temporary, low-resolution reference
 crops. Replace them with the studio's original, licensed high-resolution
 photographs before launch.
+
+The seasonal booking banner uses a [photo by Laura James on Pexels](https://www.pexels.com/photo/christmas-tree-with-red-and-golden-baubles-and-glowing-lights-6102551/), under the [Pexels license](https://www.pexels.com/license/).

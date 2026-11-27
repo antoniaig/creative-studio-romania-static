@@ -88,6 +88,12 @@ img { display: block; max-width: 100%; }
 .hero-copy h1 em:last-child { color: #d7a86f; }
 .hero-tagline { margin: 23px 0; font: 13px var(--serif); letter-spacing: .28em; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 26px; }
+.hero-seasonal { position: relative; display: flex; width: min(100%, 440px); align-items: center; justify-content: space-between; gap: 12px; margin-top: 26px; padding: 16px 18px; border: 1px solid #e6c69db3; border-radius: 12px; background: linear-gradient(90deg, #211710ef, #21171099), url("../images/brand/home/christmas-pexels.jpg") center 35% / cover no-repeat; box-shadow: 0 12px 30px #1c100d40; transition: border-color .25s ease, box-shadow .25s ease; }
+.hero-seasonal > span:first-child { display: grid; gap: 4px; }
+.hero-seasonal__label, .hero-seasonal__action { color: #efd09d; font-size: 9px; letter-spacing: .12em; }
+.hero-seasonal strong { color: #fff8ed; font: italic 400 clamp(20px, 6vw, 27px)/1.05 "Playfair Display", Georgia, serif; letter-spacing: .02em; white-space: nowrap; text-shadow: 0 2px 8px #000b; }
+.hero-seasonal__action { margin-top: 16px; padding: 10px 12px; border-radius: 6px; background: linear-gradient(110deg, #efd09d, #c89759); color: #352217; white-space: nowrap; }
+.hero-seasonal:hover, .hero-seasonal:focus-visible { border-color: #f3d9b2; box-shadow: 0 12px 32px #1c100d70; }
 .button { display: inline-flex; min-height: 43px; align-items: center; justify-content: center; gap: 30px; padding: 0 25px; border: 1px solid #ddbd92; border-radius: 8px; font-size: 10px; letter-spacing: .12em; transition: transform .25s ease; }
 .button--gold { color: #3a281c; background: linear-gradient(110deg, #efd09d, #a77740); }
 .button--outline { min-width: 165px; color: #fff; border-color: #e7d2c0; }
@@ -258,6 +264,9 @@ img { display: block; max-width: 100%; }
 @media (max-width: 400px) {
     .hero-actions { gap: 10px; }
     .button { padding: 0 16px; }
+}
+@media (max-width: 550px) {
+    .hero-seasonal { align-items: flex-start; flex-direction: column; }
     .button--outline { min-width: 110px; }
 }
 @media (hover: none), (pointer: coarse) {
