@@ -400,6 +400,8 @@ function detailPage(item, group) {
 
 function homePage() {
     const root = "./";
+    const christmasFilm = `${root}videos/christmas-reel-1.mp4`;
+    const christmasPoster = `${root}images/brand/photography/christmas/reels/christmas-reel-1.jpg`;
     return `<main class="home-page">
     <div class="home-veil" aria-hidden="true"><div class="home-veil__fabric"></div></div>
     <section class="home-hero" id="home" aria-labelledby="hero-title">
@@ -423,13 +425,17 @@ function homePage() {
                     <span class="hero-seasonal__action">REZERVĂ ACUM <span aria-hidden="true">→</span></span>
                 </a>
             </div>
-            <div class="hero-preview">
-                <span class="hero-preview__image hero-preview__image--photo" aria-hidden="true"></span>
-                <span class="hero-preview__image hero-preview__image--creations" aria-hidden="true"></span>
-                <button class="hero-watch" type="button" data-video-open="true">
-                    <span class="hero-watch__play" aria-hidden="true">${playIcon()}</span>
-                    <span>WATCH<br/>OUR STORY</span>
-                </button>
+            <div class="hero-preview" lang="ro">
+                <video class="hero-preview__film" muted playsinline preload="none" poster="${christmasPoster}" src="${christmasFilm}#t=3.8,8.8" aria-hidden="true"></video>
+                <p class="eyebrow">ATELIERUL LUI MOȘ CRĂCIUN · 2025</p>
+                <h2>Un strop de <em>magie.</em></h2>
+                <p class="hero-preview__intro">Revezi decorul din 2025, în timp ce pregătim povestea de Crăciun 2026.</p>
+                <div class="hero-preview__actions">
+                    <button class="hero-watch" type="button" data-video-open="true" aria-label="Redă clipul de Crăciun 2025" aria-haspopup="dialog">
+                        <span class="hero-watch__play" aria-hidden="true">${playIcon()}</span>
+                    </button>
+                    <a class="text-link" href="${root}photography/craciun/">VEZI CATALOGUL <span class="text-link__icon">${arrowIcon()}</span></a>
+                </div>
             </div>
         </div>
     </section>
@@ -479,9 +485,9 @@ function homePage() {
         ${creationCollections.every((item) => item.comingSoon) ? `<div class="coming-soon-heading"><span class="coming-soon">Coming soon</span></div>` : ""}
         <div class="chapter-grid">${creationCollections.map((item) => chapterTile({ ...item, path: `creations/${item.slug}/` }, root)).join("\n            ")}</div>
     </section>
-    <dialog class="video-dialog" id="video-dialog" aria-label="Our studio story">
-        <button class="video-dialog__close" type="button" data-video-close="true" aria-label="Close video">×</button>
-        <video controls preload="none" src="${root}videos/studio-story.mp4">Your browser does not support video playback.</video>
+    <dialog class="video-dialog video-dialog--portrait" id="video-dialog" lang="ro" aria-label="Atelierul lui Moș Crăciun 2025">
+        <button class="video-dialog__close" type="button" data-video-close="true" aria-label="Închide clipul">×</button>
+        <video controls playsinline preload="none" poster="${christmasPoster}" src="${christmasFilm}">Browserul tău nu poate reda acest clip.</video>
     </dialog>
 </main>`;
 }
@@ -531,6 +537,9 @@ function christmasEditionSection({ year, items, filmsOnly }) {
 
 function christmasGalleryPage() {
     return `<main class="landing-page christmas-catalog">
+    <nav class="christmas-years content-section" aria-label="Alege ediția de Crăciun">
+        ${[...christmasEditions].reverse().map(({ year }) => `<a href="#craciun-${year}">${year}</a>`).join("\n        ")}
+    </nav>
     <section class="christmas-announcement content-section" aria-labelledby="christmas-announcement-title">
         <div class="christmas-announcement__content">
             <div lang="en">
@@ -542,9 +551,6 @@ function christmasGalleryPage() {
         </div>
         ${christmasReel("1", "Decorul de Crăciun 2025", { caption: "Christmas 2025 · Behind the scenes", autoplay: true })}
     </section>
-    <nav class="christmas-years content-section" aria-label="Alege ediția de Crăciun">
-        ${christmasEditions.map(({ year }) => `<a href="#craciun-${year}">${year}</a>`).join("\n        ")}
-    </nav>
     <div class="christmas-gallery content-section">
         ${christmasEditions.map(christmasEditionSection).join("\n        ")}
     </div>

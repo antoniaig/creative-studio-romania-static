@@ -6,6 +6,7 @@ const searchPanel = document.querySelector("#site-search");
 const searchInput = document.querySelector("#site-search-input");
 const videoDialog = document.querySelector("#video-dialog");
 const studioVideo = videoDialog?.querySelector("video");
+const heroPreviewVideo = document.querySelector(".hero-preview__film");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const cursorAccent = document.querySelector(".cursor-accent");
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
@@ -112,6 +113,7 @@ document.querySelectorAll(".button").forEach((button) => {
 
 reducedMotion.addEventListener("change", (event) => {
     if (!event.matches) return;
+    heroPreviewVideo?.pause();
     cursorAccent?.classList.remove("is-visible");
     preloader?.remove();
     document.querySelectorAll(".button").forEach((button) => { button.style.transform = ""; });
@@ -178,9 +180,13 @@ document.addEventListener("click", (event) => {
     }
 });
 
+if (!reducedMotion.matches) heroPreviewVideo?.play().catch(() => {});
+
 document.querySelector("[data-video-open]")?.addEventListener("click", () => {
     if (videoDialog instanceof HTMLDialogElement && !videoDialog.open) {
+        heroPreviewVideo?.pause();
         videoDialog.showModal();
+        studioVideo?.play().catch(() => {});
     }
 });
 
@@ -203,7 +209,7 @@ document.querySelectorAll(".christmas-gallery__player").forEach((player) => {
     const title = video.getAttribute("aria-label");
     const autoplay = player.hasAttribute("data-gallery-autoplay");
     let previewing = false;
-    let soundChanged = false;
+    let mutedOnPlay = false;
 
     function updatePlayback() {
         const playing = !video.paused && !video.ended;
@@ -226,7 +232,7 @@ document.querySelectorAll(".christmas-gallery__player").forEach((player) => {
 
         previewing = false;
         if (video.paused || video.ended) {
-            if (touchPlayback && !soundChanged) video.muted = false;
+            video.muted = mutedOnPlay;
             video.play().catch(() => {});
         } else {
             video.pause();
@@ -234,8 +240,8 @@ document.querySelectorAll(".christmas-gallery__player").forEach((player) => {
     });
     sound.addEventListener("click", () => {
         previewing = false;
-        soundChanged = true;
         video.muted = !video.muted;
+        mutedOnPlay = video.muted;
     });
 
     player.addEventListener("pointerenter", (event) => {

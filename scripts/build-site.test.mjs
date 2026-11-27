@@ -49,9 +49,13 @@ test("builds a self-contained static site with every current route", async () =>
 
     const home = await readFile(path.join(projectRoot, "dist/index.html"), "utf8");
     assert.match(home, /aria-label="Homepage sections"/);
-    assert.match(home, /id="video-dialog"/);
+    assert.match(home, /<dialog[^>]+id="video-dialog"[^>]+>[\s\S]*?<video[^>]+src="\.\/videos\/christmas-reel-1\.mp4"/);
     assert.match(home, /class="home-veil" aria-hidden="true"/);
     assert.match(home, /class="hero-watch__play" aria-hidden="true"><svg class="play-icon"/);
+    const heroPreview = home.match(/<div class="hero-preview" lang="ro">[\s\S]*?<\/section>/)?.[0] ?? "";
+    assert.match(heroPreview, /<video class="hero-preview__film" muted playsinline[^>]+src="\.\/videos\/christmas-reel-1\.mp4#t=3\.8,8\.8"[^>]*>/);
+    assert.match(heroPreview, /2025[\s\S]*?Crăciun 2026/);
+    assert.match(heroPreview, /href="\.\/photography\/craciun\/">VEZI CATALOGUL/);
     assert.match(home, /<a class="hero-seasonal" href="\.\/programari\/">[\s\S]*?Christmas Photo Shoot[\s\S]*?REZERVĂ ACUM/);
     assert.match(home, /href="\.\/photography\/craciun\/"/);
     assert.match(home, /src="\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg"/);
@@ -108,8 +112,8 @@ test("builds a self-contained static site with every current route", async () =>
     ];
     assert.match(christmas, /Christmas 2026 · Coming soon[\s\S]*?Get ready for <em>a little magic\.<\/em>/);
     assert.match(christmas, /&amp;family=Great%20Vibes&amp;family=Jost/);
+    assert.match(christmas, /<main class="landing-page christmas-catalog">\s*<nav class="christmas-years content-section"[^>]*>\s*<a href="#craciun-2023">2023<\/a>\s*<a href="#craciun-2024">2024<\/a>\s*<a href="#craciun-2025">2025<\/a>\s*<\/nav>/);
     for (const year of [2025, 2024, 2023]) {
-        assert.ok(christmas.includes(`href="#craciun-${year}">${year}</a>`));
         assert.ok(christmas.includes(`<h2 id="craciun-${year}-title"><span><span class="christmas-edition__name">Crăciun</span> <em>${year}</em></span></h2>`));
     }
     const edition2025 = christmas.match(/<section class="christmas-edition" id="craciun-2025"[\s\S]*?<\/section>/)?.[0] ?? "";
