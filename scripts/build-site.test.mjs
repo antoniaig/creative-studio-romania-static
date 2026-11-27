@@ -106,7 +106,7 @@ test("builds a self-contained static site with every current route", async () =>
         "1", "DfZ71qNoxxL", "3", "DC1w8u8MWu3", "DDIDCByK6p7", "DDKXqF4qkxH", "DDPv2_7o1yr", "DDR-UDsIRL_",
         "DDaBSjmoqjv", "DDcgBsHom6s", "DDhfAj1IJ24", "DD7LTAAo3Jt", "DD9p5HRIA4B", "2", "DBjWPZkopSE", "C0APmDhMmsC"
     ];
-    assert.match(christmas, /În curând[\s\S]*?Decorul de Crăciun 2026/);
+    assert.match(christmas, /Christmas 2026 · Coming soon[\s\S]*?Get ready for <em>a little magic\.<\/em>/);
     for (const year of [2025, 2024, 2023]) {
         assert.ok(christmas.includes(`href="#craciun-${year}">${year}</a>`));
     }
@@ -116,13 +116,13 @@ test("builds a self-contained static site with every current route", async () =>
     assert.equal((edition2025.match(/<img\b/g) ?? []).length, 28);
     assert.doesNotMatch(edition2024, /<img\b/);
     const editionReels = (edition) => Array.from(edition.matchAll(/<source src="\.\.\/\.\.\/videos\/christmas-reel-([^"]+)\.mp4"/g), ([, id]) => id);
-    assert.deepEqual(editionReels(edition2025), ["1", "DfZ71qNoxxL"]);
+    assert.deepEqual(editionReels(edition2025), ["DfZ71qNoxxL"]);
     assert.deepEqual(editionReels(edition2024), reelIds.slice(2, -2));
     assert.deepEqual(editionReels(edition2023), ["DBjWPZkopSE", "C0APmDhMmsC"]);
-    const featured = edition2025.split('class="christmas-gallery__grid christmas-gallery__grid--featured"')[1]?.split('class="christmas-gallery__grid"')[0] ?? "";
-    assert.deepEqual(Array.from(featured.matchAll(/<(img|video)\b/g), ([, type]) => type), ["img", "video", "img"]);
-    assert.deepEqual(editionReels(featured), ["1"]);
-    assert.equal((christmas.match(/>Behind the scenes<\/figcaption>/g) ?? []).length, reelIds.length);
+    const announcement = christmas.match(/<section class="christmas-announcement content-section"[\s\S]*?<\/section>/)?.[0] ?? "";
+    assert.deepEqual(editionReels(announcement), ["1"]);
+    assert.match(announcement, /Christmas 2025 · Behind the scenes/);
+    assert.equal((christmas.match(/Behind the scenes<\/figcaption>/g) ?? []).length, reelIds.length);
     assert.doesNotMatch(christmas, /christmas-01\.jpg/);
     const videos = christmas.match(/<video class="christmas-gallery__video"[^>]*>/g) ?? [];
     assert.equal(videos.length, reelIds.length);
@@ -156,10 +156,10 @@ test("builds a self-contained static site with every current route", async () =>
     assert.match(booking, /src="\.\.\/images\/brand\/photography\/christmas\/christmas-pet-portrait\.jpg"[^>]*\/>[\s\S]*?<strong>Little<\/strong>/);
     assert.match(booking, /src="\.\.\/images\/brand\/photography\/christmas\/christmas-baby\.jpg"[^>]*\/>[\s\S]*?<strong>Signature<\/strong>/);
     assert.match(booking, /src="\.\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg"[^>]*\/>[\s\S]*?<strong>Grand<\/strong>/);
-    assert.match(booking, /<iframe[^>]+name="booking-calendar"[^>]+src="https:\/\/cal\.com\/antonia-ghiliman-p1v0nm\/craciun-little\?embed=true"/);
+    assert.match(booking, /<iframe[^>]+name="booking-calendar"[^>]+src="https:\/\/cal\.com\/antonia-ghiliman-p1v0nm\/craciun-little\?embed=true&amp;attendeePhoneNumber=%2B40"/);
     for (const [slug, title, duration] of [["craciun-little", "Little", "1 oră"], ["craciun-signature", "Signature", "2 ore"], ["craciun-grand", "Grand", "3 ore"]]) {
-        assert.match(booking, new RegExp(`href="https://cal\\.com/antonia-ghiliman-p1v0nm/${slug}\\?embed=true" target="booking-calendar"`));
-        assert.match(booking, new RegExp(`href="https://cal\\.com/antonia-ghiliman-p1v0nm/${slug}" target="_blank"`));
+        assert.match(booking, new RegExp(`href="https://cal\\.com/antonia-ghiliman-p1v0nm/${slug}\\?embed=true&amp;attendeePhoneNumber=%2B40" target="booking-calendar"`));
+        assert.match(booking, new RegExp(`href="https://cal\\.com/antonia-ghiliman-p1v0nm/${slug}\\?attendeePhoneNumber=%2B40" target="_blank"`));
         assert.match(booking, new RegExp(`${duration}</span><strong>${title}</strong>`));
     }
     assert.match(home, /href="\.\/programari\/"/);

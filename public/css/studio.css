@@ -146,11 +146,14 @@ img { display: block; max-width: 100%; }
 .christmas-feature__image { align-self: stretch; min-height: 280px; overflow: hidden; background: #e9dacb; }
 .christmas-feature__image img { width: 100%; height: 100%; object-fit: contain; }
 .christmas-catalog { padding-top: clamp(20px, 4vw, 44px); }
-.christmas-announcement { padding: clamp(20px, 4vw, 38px); border: 1px solid #a77c56; background: radial-gradient(ellipse at 50% 0%, #4b262b, #321c20 78%); color: #fff4e4; text-align: center; }
-.christmas-announcement .eyebrow { color: #e6c69d; text-transform: uppercase; }
-.christmas-announcement h2 { margin: 8px 0 0; font: 500 clamp(29px, 4.5vw, 48px)/1.04 var(--serif); }
-.christmas-announcement h2 em { color: #e6c69d; font-weight: 400; }
-.christmas-catalog .landing-intro { padding-top: clamp(32px, 5vw, 62px); }
+.christmas-announcement { display: grid; grid-template-columns: minmax(0, 1fr) minmax(185px, 265px); align-items: center; gap: clamp(24px, 6vw, 78px); width: min(89%, 1060px); margin-bottom: clamp(24px, 4vw, 48px); padding: clamp(24px, 4vw, 48px); border: 1px solid #dfc7ad; background: radial-gradient(ellipse at 18% 35%, #fffaf0, #f2e0ca); }
+.christmas-announcement .eyebrow { display: flex; align-items: center; gap: 10px; color: #78542f; text-transform: uppercase; }
+.christmas-announcement .eyebrow::before { flex: 0 1 30px; height: 1px; background: #bb956c; content: ""; }
+.christmas-announcement h1 { margin: 13px 0 16px; font: 500 clamp(40px, 6vw, 80px)/.96 var(--serif); }
+.christmas-announcement h1 em { display: block; color: #835334; font-weight: 400; }
+.christmas-announcement__intro { max-width: 36ch; margin: 0; line-height: 1.65; }
+.christmas-announcement .christmas-gallery__item { margin: 0; overflow: hidden; border: 1px solid #bc9877; border-radius: 6px; box-shadow: 0 12px 25px #50301b22; }
+.christmas-announcement .christmas-gallery__tag { text-align: center; }
 .christmas-years { position: sticky; top: 0; z-index: 5; display: flex; justify-content: center; gap: 10px; padding: 12px 0; border-block: 1px solid #ddc4ac; background: var(--cream); }
 .christmas-years a { padding: 7px 22px; border: 1px solid #bc9877; border-radius: 999px; font-size: 14px; }
 .christmas-years a:hover, .christmas-years a:focus-visible { background: #3c2521; color: #fff4e4; }
@@ -158,10 +161,9 @@ img { display: block; max-width: 100%; }
 .christmas-edition { padding-top: clamp(24px, 4vw, 48px); scroll-margin-top: 66px; }
 .christmas-edition h2 { margin: 0 0 22px; font: 500 clamp(34px, 5vw, 56px)/1 var(--serif); }
 .christmas-gallery__grid { --gallery-gap: 16px; columns: 3; column-gap: var(--gallery-gap); margin-bottom: 36px; text-align: left; }
-.christmas-gallery__grid--featured { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; gap: var(--gallery-gap); margin-bottom: var(--gallery-gap); }
 .christmas-gallery__grid--films { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gallery-gap); }
 .christmas-gallery__item { display: inline-block; width: 100%; margin: 0 0 var(--gallery-gap); break-inside: avoid; vertical-align: top; }
-.christmas-gallery__grid--featured .christmas-gallery__item, .christmas-gallery__grid--films .christmas-gallery__item { margin: 0; }
+.christmas-gallery__grid--films .christmas-gallery__item { margin: 0; }
 .christmas-gallery__item img, .christmas-gallery__video { display: block; width: 100%; height: auto; }
 .christmas-gallery__video { aspect-ratio: 9 / 16; object-fit: cover; }
 .christmas-gallery__player { position: relative; }
@@ -266,8 +268,11 @@ img { display: block; max-width: 100%; }
     .christmas-feature__image { min-height: 0; }
     .christmas-feature__image img { height: auto; }
     .christmas-gallery__grid { --gallery-gap: 10px; columns: 2; }
-    .christmas-gallery__grid--featured, .christmas-gallery__grid--films { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .christmas-gallery__grid--featured .christmas-gallery__item--video { grid-area: 1 / 1 / 2 / -1; width: min(75%, 320px); justify-self: center; }
+    .christmas-announcement { grid-template-columns: minmax(0, 1fr); justify-items: center; padding: clamp(16px, 5vw, 28px); text-align: center; }
+    .christmas-announcement .eyebrow { justify-content: center; }
+    .christmas-announcement__intro { margin-inline: auto; }
+    .christmas-announcement .christmas-gallery__item { width: min(76%, 225px); }
+    .christmas-gallery__grid--films { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .chapter-grid, .listing-grid { grid-template-columns: repeat(2, 1fr); }
     .chapter-tile { min-height: 160px; padding: 16px; }
     .chapter-tile__title { font-size: 23px; }

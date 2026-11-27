@@ -18,7 +18,6 @@ const bookingSessions = [
 const bookingBaseUrl = "https://cal.com/antonia-ghiliman-p1v0nm";
 const christmas2025 = [
     { photo: "christmas-06.jpg", alt: "Fetiță lângă șemineul decorat de Crăciun", width: 1200, height: 1800 },
-    { reel: "1" },
     { photo: "craciun-113.jpg", alt: "Tată ridicând un copil îmbrăcat în roșu lângă brad", width: 1067, height: 1600 },
     { photo: "gallery-01.jpg", alt: "Mamă și copil într-un decor de Crăciun", width: 1800, height: 1200 },
     { photo: "craciun-58.jpg", alt: "Două persoane în pulovere roșii cu motive de Crăciun", width: 1600, height: 1067 },
@@ -48,7 +47,7 @@ const christmas2025 = [
     { photo: "craciun-207.jpg", alt: "Copil îmbrățișând un urs de pluș lângă luminițele de Crăciun", width: 1600, height: 1067 }
 ];
 const christmasEditions = [
-    { year: 2025, items: christmas2025, featuredCount: 3 },
+    { year: 2025, items: christmas2025 },
     {
         year: 2024,
         filmsOnly: true,
@@ -486,21 +485,13 @@ function homePage() {
 </main>`;
 }
 
-function christmasEditionSection({ year, items, filmsOnly, featuredCount = 0 }) {
-    const imageRoot = "../../images/brand/photography/christmas";
-    const galleryItems = [];
-    let reelNumber = 0;
-    for (const { photo, alt, width, height, reel } of items) {
-        if (photo) {
-            galleryItems.push(`<figure class="christmas-gallery__item"><img src="${imageRoot}/${photo}" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="lazy" decoding="async"/></figure>`);
-        }
-        if (reel) {
-            const stem = `christmas-reel-${reel}`;
-            const title = `Crăciun ${year}, videoclip ${++reelNumber}`;
-            galleryItems.push(`<figure class="christmas-gallery__item christmas-gallery__item--video">
+function christmasReel(reel, title, caption = "Behind the scenes") {
+    const stem = `christmas-reel-${reel}`;
+    const label = escapeHtml(title);
+    return `<figure class="christmas-gallery__item christmas-gallery__item--video">
                 <div class="christmas-gallery__player">
-                    <video class="christmas-gallery__video" controls muted playsinline preload="none" poster="${imageRoot}/reels/${stem}.jpg" aria-label="${title}"><source src="../../videos/${stem}.mp4" type="video/mp4"/>${title}</video>
-                    <button class="christmas-gallery__control christmas-gallery__play" type="button" data-gallery-play aria-label="Redă ${title}" hidden></button>
+                    <video class="christmas-gallery__video" controls muted playsinline preload="none" poster="../../images/brand/photography/christmas/reels/${stem}.jpg" aria-label="${label}"><source src="../../videos/${stem}.mp4" type="video/mp4"/>${label}</video>
+                    <button class="christmas-gallery__control christmas-gallery__play" type="button" data-gallery-play aria-label="Redă ${label}" hidden></button>
                     <button class="christmas-gallery__control christmas-gallery__sound" type="button" data-gallery-sound aria-label="Sunet" aria-pressed="false" hidden>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
                             <path d="M11 5 6 9H3v6h3l5 4z"/>
@@ -509,18 +500,25 @@ function christmasEditionSection({ year, items, filmsOnly, featuredCount = 0 }) 
                         </svg>
                     </button>
                 </div>
-                <figcaption class="christmas-gallery__tag" lang="en">Behind the scenes</figcaption>
-            </figure>`);
+                <figcaption class="christmas-gallery__tag" lang="en">${escapeHtml(caption)}</figcaption>
+            </figure>`;
+}
+
+function christmasEditionSection({ year, items, filmsOnly }) {
+    const galleryItems = [];
+    let reelNumber = 0;
+    for (const { photo, alt, width, height, reel } of items) {
+        if (photo) {
+            galleryItems.push(`<figure class="christmas-gallery__item"><img src="../../images/brand/photography/christmas/${photo}" alt="${escapeHtml(alt)}" width="${width}" height="${height}" loading="lazy" decoding="async"/></figure>`);
+        }
+        if (reel) {
+            galleryItems.push(christmasReel(reel, `Crăciun ${year}, videoclip ${++reelNumber}`));
         }
     }
-    const featured = galleryItems.slice(0, featuredCount);
     return `<section class="christmas-edition" id="craciun-${year}" aria-labelledby="craciun-${year}-title">
         <h2 id="craciun-${year}-title">Crăciun ${year}</h2>
-        ${featured.length ? `<div class="christmas-gallery__grid christmas-gallery__grid--featured">
-            ${featured.join("\n            ")}
-        </div>` : ""}
         <div class="christmas-gallery__grid${filmsOnly ? " christmas-gallery__grid--films" : ""}">
-            ${galleryItems.slice(featuredCount).join("\n            ")}
+            ${galleryItems.join("\n            ")}
         </div>
     </section>`;
 }
@@ -528,13 +526,12 @@ function christmasEditionSection({ year, items, filmsOnly, featuredCount = 0 }) 
 function christmasGalleryPage() {
     return `<main class="landing-page christmas-catalog">
     <section class="christmas-announcement content-section" aria-labelledby="christmas-announcement-title">
-        <p class="eyebrow">În curând</p>
-        <h2 id="christmas-announcement-title">Decorul de Crăciun 2026 <em>e în pregătire.</em></h2>
-    </section>
-    <section class="landing-intro content-section">
-        <p class="eyebrow eyebrow--dark">PHOTO BY M · O POVESTE DE IARNĂ</p>
-        <h1>Crăciun în <em>imagini și mișcare.</em></h1>
-        <p class="landing-intro__summary">Lumini calde, oameni dragi și momente pe care le păstrăm aproape.</p>
+        <div class="christmas-announcement__copy" lang="en">
+            <p class="eyebrow">Christmas 2026 · Coming soon</p>
+            <h1 id="christmas-announcement-title">Get ready for <em>a little magic.</em></h1>
+            <p class="christmas-announcement__intro">While we prepare this year’s set, take a look back at our 2025 Christmas studio.</p>
+        </div>
+        ${christmasReel("1", "Decorul de Crăciun 2025", "Christmas 2025 · Behind the scenes")}
     </section>
     <nav class="christmas-years content-section" aria-label="Alege ediția de Crăciun">
         ${christmasEditions.map(({ year }) => `<a href="#craciun-${year}">${year}</a>`).join("\n        ")}
@@ -565,16 +562,23 @@ function searchPage() {
 </main>`;
 }
 
+function bookingSessionUrl(slug, { embed = false } = {}) {
+    const url = new URL(`${bookingBaseUrl}/${slug}`);
+    if (embed) url.searchParams.set("embed", "true");
+    url.searchParams.set("attendeePhoneNumber", "+40");
+    return url.href;
+}
+
 function bookingPage() {
     const cards = bookingSessions.map((session) => {
-        const url = `${bookingBaseUrl}/${session.slug}`;
-        return `<a class="booking-session" href="${url}?embed=true" target="booking-calendar" data-booking-session>
+        const url = bookingSessionUrl(session.slug, { embed: true });
+        return `<a class="booking-session" href="${escapeHtml(url)}" target="booking-calendar" data-booking-session>
                 <img src="../images/brand/photography/${session.image}.jpg" alt="" loading="lazy"/>
                 <span class="booking-session__body"><span class="booking-session__duration">${session.duration}</span><strong>${session.title}</strong><span>${session.description}</span><span class="booking-session__action">ALEGE ȘEDINȚA <span aria-hidden="true">→</span></span></span>
             </a>`;
     }).join("\n            ");
     const fallbackLinks = bookingSessions.map((session) =>
-        `<a href="${bookingBaseUrl}/${session.slug}" target="_blank" rel="noopener noreferrer">${session.title}</a>`
+        `<a href="${escapeHtml(bookingSessionUrl(session.slug))}" target="_blank" rel="noopener noreferrer">${session.title}</a>`
     ).join(" · ");
     return `<main class="landing-page booking-page">
     <section class="booking-section content-section" aria-labelledby="booking-title">
@@ -595,7 +599,7 @@ function bookingPage() {
             <p>Alege ședința, apoi selectează un interval disponibil în calendar.</p>
         </div>
         <div class="booking-calendar__frame" id="calendar">
-            <iframe class="booking-calendar" name="booking-calendar" src="${bookingBaseUrl}/${bookingSessions[0].slug}?embed=true" title="Programări foto în Cal.com" loading="lazy"></iframe>
+            <iframe class="booking-calendar" name="booking-calendar" src="${escapeHtml(bookingSessionUrl(bookingSessions[0].slug, { embed: true }))}" title="Programări foto în Cal.com" loading="lazy"></iframe>
         </div>
         <p class="booking-fallback">Nu se afișează calendarul? Deschide pagina pentru: ${fallbackLinks}&nbsp;<span class="booking-fallback__desktop-arrow" aria-hidden="true">↗</span><svg class="booking-fallback__mobile-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M3.5 12.5 12 4M5.5 4H12v6.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
     </section>
