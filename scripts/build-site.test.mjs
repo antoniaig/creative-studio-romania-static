@@ -53,7 +53,7 @@ test("builds a self-contained static site with every current route", async () =>
     assert.match(home, /class="home-veil" aria-hidden="true"/);
     assert.match(home, /class="hero-watch__play" aria-hidden="true"><svg class="play-icon"/);
     const heroPreview = home.match(/<div class="hero-preview" lang="ro">[\s\S]*?<\/section>/)?.[0] ?? "";
-    assert.match(heroPreview, /<video class="hero-preview__film" muted playsinline[^>]+src="\.\/videos\/christmas-reel-1\.mp4#t=3\.8,8\.8"[^>]*>/);
+    assert.match(heroPreview, /<video class="hero-preview__film" autoplay muted playsinline[^>]+src="\.\/videos\/christmas-reel-1\.mp4#t=3\.8,8\.8"[^>]*>/);
     assert.match(heroPreview, /2025[\s\S]*?Crăciun 2026/);
     assert.match(heroPreview, /href="\.\/photography\/craciun\/">VEZI CATALOGUL/);
     assert.match(home, /<a class="hero-seasonal" href="\.\/programari\/">[\s\S]*?Christmas Photo Shoot[\s\S]*?REZERVĂ ACUM/);
