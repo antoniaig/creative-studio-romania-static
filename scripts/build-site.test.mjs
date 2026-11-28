@@ -132,6 +132,7 @@ test("builds a self-contained static site with every current route", async () =>
         assert.match(section, bookingLink);
     }
     assert.deepEqual(editionReels(announcement), ["1"]);
+    assert.match(announcement, /class="christmas-gallery__item christmas-gallery__item--video"[\s\S]*?<\/figure>\s*<a class="text-link christmas-booking-link"/);
     assert.match(announcement, /Christmas 2025 · Behind the scenes/);
     assert.match(announcement, /class="christmas-gallery__player" data-gallery-autoplay>/);
     assert.equal((christmas.match(/\bdata-gallery-autoplay\b/g) ?? []).length, 1);

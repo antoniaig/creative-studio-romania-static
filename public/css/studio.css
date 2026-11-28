@@ -152,7 +152,9 @@ img { display: block; max-width: 100%; }
 .christmas-feature__image img { width: 100%; height: 100%; object-fit: contain; }
 .christmas-catalog { padding-top: clamp(20px, 4vw, 44px); }
 .christmas-announcement { display: grid; grid-template-columns: minmax(0, 1fr) minmax(185px, 265px); align-items: center; gap: clamp(24px, 6vw, 78px); width: min(89%, 1060px); margin-bottom: clamp(24px, 4vw, 48px); padding: clamp(24px, 4vw, 48px); border: 1px solid #dfc7ad; background: radial-gradient(ellipse at 18% 35%, #fffaf0, #f2e0ca); }
-.christmas-announcement__content { display: grid; grid-template-rows: 1fr auto; align-self: stretch; align-items: center; justify-items: start; gap: 22px; }
+.christmas-announcement__content { align-self: center; }
+.christmas-announcement > .christmas-gallery__item { grid-column: 2; grid-row: 1 / span 2; }
+.christmas-announcement > .christmas-booking-link { grid-column: 1; grid-row: 2; justify-self: start; align-self: end; }
 .christmas-announcement .eyebrow { display: flex; align-items: center; gap: 10px; color: #78542f; text-transform: uppercase; }
 .christmas-announcement .eyebrow::before { flex: 0 1 30px; height: 1px; background: #bb956c; content: ""; }
 .christmas-announcement h1 { margin: 13px 0 16px; font: 500 clamp(40px, 6vw, 80px)/.96 var(--serif); }
@@ -295,7 +297,8 @@ img { display: block; max-width: 100%; }
     .christmas-feature__image img { height: auto; }
     .christmas-gallery__grid { --gallery-gap: 10px; columns: 2; }
     .christmas-announcement { grid-template-columns: minmax(0, 1fr); justify-items: center; padding: clamp(16px, 5vw, 28px); text-align: center; }
-    .christmas-announcement__content { justify-items: center; }
+    .christmas-announcement > .christmas-gallery__item { grid-column: 1; grid-row: 2; }
+    .christmas-announcement > .christmas-booking-link { grid-column: 1; grid-row: 3; justify-self: center; }
     .christmas-announcement .eyebrow { justify-content: center; }
     .christmas-announcement__intro { margin-inline: auto; }
     .christmas-announcement .christmas-gallery__item { width: min(76%, 225px); }

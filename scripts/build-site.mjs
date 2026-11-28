@@ -545,9 +545,9 @@ function christmasGalleryPage() {
                 <h1 id="christmas-announcement-title">Get ready for <em>a little magic.</em></h1>
                 <p class="christmas-announcement__intro">While we prepare this year’s set, take a look back at our 2025 Christmas studio.</p>
             </div>
-            ${christmasBookingLink()}
         </div>
         ${christmasReel("1", "Decorul de Crăciun 2025", { caption: "Christmas 2025 · Behind the scenes", autoplay: true })}
+        ${christmasBookingLink()}
     </section>
     <nav class="christmas-years content-section" aria-label="Alege ediția de Crăciun">
         ${[...christmasEditions].reverse().map(({ year }) => `<a href="#craciun-${year}">${year}</a>`).join("\n        ")}
