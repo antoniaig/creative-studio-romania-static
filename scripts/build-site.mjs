@@ -426,7 +426,8 @@ function homePage() {
                 </a>
             </div>
             <div class="hero-preview" lang="ro">
-                <video class="hero-preview__film" autoplay muted playsinline preload="none" poster="${christmasPoster}" src="${christmasFilm}#t=3.8,8.8" aria-hidden="true"></video>
+                <img class="hero-preview__poster" src="${christmasPoster}" alt="" aria-hidden="true"/>
+                <video class="hero-preview__film" muted loop playsinline preload="auto" poster="${christmasPoster}" src="${christmasFilm}" aria-hidden="true"></video>
                 <p class="eyebrow">ATELIERUL LUI MOȘ CRĂCIUN · 2025</p>
                 <h2>Un strop de <em>magie.</em></h2>
                 <p class="hero-preview__intro">Revezi decorul din 2025, în timp ce pregătim povestea de Crăciun 2026.</p>

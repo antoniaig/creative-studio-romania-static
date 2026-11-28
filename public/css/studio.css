@@ -106,7 +106,9 @@ img { display: block; max-width: 100%; }
 .button--outline { min-width: 165px; color: #fff; border-color: #e7d2c0; }
 .button:hover { filter: brightness(1.12); }
 .hero-preview { position: absolute; top: 25%; right: 2%; isolation: isolate; overflow: hidden; width: clamp(246px, 28vw, 390px); padding: clamp(17px, 2.3vw, 30px); border: 6px solid #30221b; border-radius: 20px; color: #fff8ef; background: #30221b; box-shadow: 0 0 0 1px #e6c69d99, 0 18px 45px #26191180; }
-.hero-preview__film { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 54%; pointer-events: none; }
+.hero-preview__poster, .hero-preview__film { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 54%; pointer-events: none; }
+.hero-preview__film { opacity: 0; transition: opacity .25s ease; }
+.hero-preview[data-video-playing] .hero-preview__film { opacity: 1; }
 .hero-preview::before { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, #24170fd9, #2a1a12a6 60%, #2a1a1266); content: ""; pointer-events: none; }
 .hero-preview :is(h2, .hero-preview__intro, .text-link) { text-shadow: 0 1px 6px #180e08; }
 .hero-preview .eyebrow { color: #efd09d; font-size: 9px; }

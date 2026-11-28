@@ -180,7 +180,33 @@ document.addEventListener("click", (event) => {
     }
 });
 
-if (!reducedMotion.matches) heroPreviewVideo?.play().catch(() => {});
+function playHeroPreview() {
+    if (!heroPreviewVideo || document.hidden || reducedMotion.matches) return;
+    heroPreviewVideo.muted = true;
+    heroPreviewVideo.play().catch(() => {
+        heroPreviewVideo.closest(".hero-preview")?.removeAttribute("data-video-playing");
+    });
+}
+
+if (heroPreviewVideo) {
+    const preview = heroPreviewVideo.closest(".hero-preview");
+    const previewObserver = "IntersectionObserver" in window
+        ? new IntersectionObserver((entries) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            playHeroPreview();
+            if (!heroPreviewVideo.paused) previewObserver.disconnect();
+        }, { threshold: 0.1 })
+        : null;
+
+    heroPreviewVideo.addEventListener("playing", () => {
+        preview?.setAttribute("data-video-playing", "");
+        previewObserver?.disconnect();
+    });
+    heroPreviewVideo.addEventListener("pause", () => preview?.removeAttribute("data-video-playing"));
+    previewObserver?.observe(preview ?? heroPreviewVideo);
+    document.addEventListener("visibilitychange", playHeroPreview);
+    playHeroPreview();
+}
 
 document.querySelector("[data-video-open]")?.addEventListener("click", () => {
     if (videoDialog instanceof HTMLDialogElement && !videoDialog.open) {
@@ -194,7 +220,10 @@ videoDialog?.querySelector("[data-video-close]")?.addEventListener("click", () =
 videoDialog?.addEventListener("click", (event) => {
     if (event.target === videoDialog) videoDialog.close();
 });
-videoDialog?.addEventListener("close", () => studioVideo?.pause());
+videoDialog?.addEventListener("close", () => {
+    studioVideo?.pause();
+    playHeroPreview();
+});
 
 document.querySelector(".christmas-catalog")?.addEventListener("play", (event) => {
     event.currentTarget.querySelectorAll(".christmas-gallery__video").forEach((video) => {
