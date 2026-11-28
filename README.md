@@ -53,6 +53,8 @@ variables in the Vercel project settings, then redeploy.
 - The Christmas gallery uses the locally stored, web-optimized photographs in
   `public/images/brand/photography/christmas/`; its photo list and descriptions
   are maintained in `scripts/build-site.mjs`. It does not depend on Google Drive.
+- The photography film categories and wedding reels are maintained in
+  `scripts/build-site.mjs`; their videos and cover frames are stored in `public/`.
 - The newsletter link directs visitors to Contact; subscription storage and
   delivery are not implemented.
 - `programari/` embeds the Cal.com booking pages listed in `bookingSessions`

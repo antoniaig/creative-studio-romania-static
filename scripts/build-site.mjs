@@ -109,6 +109,14 @@ const christmasChapter = {
     image: "christmas/christmas-160"
 };
 
+const filmCategories = [
+    { slug: "paste", number: "POVEȘTI DE PRIMĂVARĂ", title: "Paște 2025", description: "Momente de primăvară surprinse în imagini.", assetFolder: "photography", image: "reels/DIRUHvSopHp", reels: ["DIRUHvSopHp", "DIbsIftISFG", "DIg2udaMb1y"] },
+    { slug: "produse", number: "DETALII CU POVESTE", title: "Produse", description: "Povești vizuale despre produse și detaliile lor.", assetFolder: "photography", image: "reels/DJZbSnjtHJC", reels: ["DJZbSnjtHJC", "DQ9iZ8OjN8O"] },
+    { slug: "couple", number: "POVEȘTI ÎN DOI", title: "Couple", description: "Momente și povești în doi.", assetFolder: "photography", image: "reels/DNBaNe9t7Bm", reels: ["DNBaNe9t7Bm"] },
+    { slug: "diverse-tematici", number: "MOMENTE SPECIALE", title: "Diverse tematici", description: "Povești și momente de sărbătoare.", assetFolder: "photography", image: "reels/DeUH1OvoFE8", reels: ["DeUH1OvoFE8"] }
+];
+const weddingReels = ["DMA9rvKoJFa", "DfKnzpzRYV7", "DYr9MVHs0xo", "DMS2ZhVsopw"];
+
 const creationCollections = [
     {
         slug: "shop-my-closet",
@@ -140,7 +148,7 @@ const creationCollections = [
     }
 ].map((item) => ({ ...item, comingSoon: true }));
 
-const allItems = [...photographyChapters, ...creationCollections].map((item) => ({
+const allItems = [...photographyChapters, ...filmCategories, ...creationCollections].map((item) => ({
     ...item,
     path: `${item.assetFolder === "photography" ? "photography" : "creations"}/${item.slug}/`
 }));
@@ -206,6 +214,7 @@ function header(prefix, isHome) {
                     <a href="${root}photography/">All photography</a>
                     ${photographyChapters.map((item) => `<a href="${root}photography/${item.slug}/">${escapeHtml(item.title)}</a>`).join("\n                    ")}
                     <a href="${root}photography/${christmasChapter.slug}/">${escapeHtml(christmasChapter.title)}</a>
+                    ${filmCategories.map((item) => `<a href="${root}photography/${item.slug}/">${escapeHtml(item.title)}</a>`).join("\n                    ")}
                     <a href="${root}programari/">Rezervă o ședință</a>
                 </div>
             </details>
@@ -369,16 +378,17 @@ function listingPage({ title, eyebrow, description, items, comingSoon = false })
 function detailPage(item, group) {
     const parentPath = group === "photography" ? "photography/" : "creations/";
     const parentLabel = group === "photography" ? "Photo by M" : "The Creations by G";
-    const siblings = (group === "photography" ? [...photographyChapters, christmasChapter] : creationCollections)
+    const siblings = (group === "photography" ? [...photographyChapters, christmasChapter, ...filmCategories] : creationCollections)
         .filter((related) => related.slug !== item.slug)
         .map((related) => ({ ...related, path: `${group}/${related.slug}/` }));
+    const reels = group === "photography" && item.slug === "weddings" ? weddingReels : item.reels;
     const depth = 2;
     const root = rootPrefix(depth);
-    return `<main class="landing-page">
-    <section class="landing-detail">
-        <div class="landing-detail__image">
-            <img src="${root}images/brand/${item.assetFolder}/${item.slug}.jpg" alt="${escapeHtml(item.title + " editorial cover")}" fetchpriority="high"/>
-        </div>
+    return `<main class="landing-page${reels ? " film-catalog" : ""}">
+    <section class="landing-detail${item.reels ? " landing-detail--films" : ""}">
+        ${item.reels ? "" : `<div class="landing-detail__image">
+            <img src="${root}images/brand/${item.assetFolder}/${item.image || item.slug}.jpg" alt="${escapeHtml(item.title + " editorial cover")}" fetchpriority="high"/>
+        </div>`}
         <div class="landing-detail__copy">
             <p class="eyebrow eyebrow--dark">${escapeHtml(item.number)}</p>
             ${item.comingSoon ? `<p class="coming-soon coming-soon--detail">Coming soon</p>` : ""}
@@ -387,6 +397,9 @@ function detailPage(item, group) {
             <a class="text-link" href="${root}${parentPath}"><span class="text-link__icon text-link__icon--leading">${arrowIcon("left")}</span> BACK TO ${escapeHtml(parentLabel.toUpperCase())}</a>
         </div>
     </section>
+    ${reels ? `<section class="film-gallery content-section" aria-label="Videoclipuri ${escapeHtml(item.title)}">
+        <div class="christmas-gallery__grid christmas-gallery__grid--films">${reels.map((id, index) => galleryReel(`reel-${id}`, `photography/reels/${id}.jpg`, `${item.title}, videoclip ${index + 1}`, { caption: item.title })).join("\n            ")}</div>
+    </section>` : ""}
     <section class="detail-related content-section">
         <div class="section-heading">
             <div><p class="eyebrow eyebrow--dark">${group === "photography" ? "PHOTOGRAPHY CHAPTERS" : "THE COLLECTIONS"}</p>
@@ -493,12 +506,11 @@ function homePage() {
 </main>`;
 }
 
-function christmasReel(reel, title, { caption = "Christmas memories", autoplay = false } = {}) {
-    const stem = `christmas-reel-${reel}`;
+function galleryReel(stem, poster, title, { caption, autoplay = false }) {
     const label = escapeHtml(title);
     return `<figure class="christmas-gallery__item christmas-gallery__item--video">
                 <div class="christmas-gallery__player"${autoplay ? " data-gallery-autoplay" : ""}>
-                    <video class="christmas-gallery__video" controls muted playsinline preload="none" poster="../../images/brand/photography/christmas/reels/${stem}.jpg" aria-label="${label}"><source src="../../videos/${stem}.mp4" type="video/mp4"/>${label}</video>
+                    <video class="christmas-gallery__video" controls muted playsinline preload="none" poster="../../images/brand/${poster}" aria-label="${label}"><source src="../../videos/${stem}.mp4" type="video/mp4"/>${label}</video>
                     <button class="christmas-gallery__control christmas-gallery__play" type="button" data-gallery-play aria-label="Redă ${label}" hidden></button>
                     <button class="christmas-gallery__control christmas-gallery__sound" type="button" data-gallery-sound aria-label="Sunet" aria-pressed="false" hidden>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
@@ -510,6 +522,11 @@ function christmasReel(reel, title, { caption = "Christmas memories", autoplay =
                 </div>
                 <figcaption class="christmas-gallery__tag" lang="en">${escapeHtml(caption)}</figcaption>
             </figure>`;
+}
+
+function christmasReel(reel, title, { caption = "Christmas memories", autoplay = false } = {}) {
+    const stem = `christmas-reel-${reel}`;
+    return galleryReel(stem, `photography/christmas/reels/${stem}.jpg`, title, { caption, autoplay });
 }
 
 function christmasBookingLink() {
@@ -649,7 +666,8 @@ await writePage("photography/index.html", page({
         description: "Every frame tells a story. Explore the studio's photography chapters.",
         items: [
             ...photographyChapters.map((item) => ({ ...item, path: `photography/${item.slug}/` })),
-            { ...christmasChapter, path: `photography/${christmasChapter.slug}/` }
+            { ...christmasChapter, path: `photography/${christmasChapter.slug}/` },
+            ...filmCategories.map((item) => ({ ...item, path: `photography/${item.slug}/` }))
         ]
     }),
     depth: 1
@@ -674,6 +692,16 @@ for (const item of photographyChapters) {
         description: item.description,
         body: detailPage(item, "photography"),
         depth: 2
+    }));
+}
+
+for (const item of filmCategories) {
+    await writePage(`photography/${item.slug}/index.html`, page({
+        title: item.title,
+        description: item.description,
+        body: detailPage(item, "photography"),
+        depth: 2,
+        language: "ro"
     }));
 }
 

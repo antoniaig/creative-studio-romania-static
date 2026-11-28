@@ -201,6 +201,7 @@ img { display: block; max-width: 100%; }
 .christmas-gallery__sound[aria-pressed="false"] .christmas-gallery__sound-on,
 .christmas-gallery__sound[aria-pressed="true"] .christmas-gallery__sound-off { display: none; }
 .christmas-gallery__tag { padding: 8px 10px; background: #ebdac8; color: #5b3b2d; font: 500 10px/1.3 var(--sans); letter-spacing: .1em; text-transform: uppercase; }
+.film-gallery { padding-top: 40px; }
 .chapters, .collections, .detail-related { padding-top: 28px; padding-bottom: 20px; }
 .collections { padding-bottom: 70px; }
 .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 14px; }
@@ -238,6 +239,9 @@ img { display: block; max-width: 100%; }
 .landing-detail__image img { width: 100%; height: 100%; object-fit: cover; }
 .landing-detail__copy { align-self: center; padding: 10%; }
 .landing-detail__copy p { margin-left: 0; }
+.landing-detail--films { display: block; min-height: 0; text-align: center; }
+.landing-detail--films .landing-detail__copy { padding: 70px 5% 20px; }
+.landing-detail--films .landing-detail__copy p { margin-left: auto; }
 .foundation-page { padding: 110px 5%; text-align: center; }
 .foundation-page h2 { font: 54px/1 var(--serif); }
 

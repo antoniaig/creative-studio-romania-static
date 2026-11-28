@@ -48,7 +48,7 @@ if (searchResults) {
         const imageFrame = document.createElement("span");
         imageFrame.className = "listing-tile__image";
         const image = document.createElement("img");
-        image.src = `${rootPrefix}images/brand/${item.assetFolder}/${item.slug}.jpg`;
+        image.src = `${rootPrefix}images/brand/${item.assetFolder}/${item.image || item.slug}.jpg`;
         image.alt = `${item.title} editorial cover`;
         image.loading = "lazy";
         imageFrame.append(image);
@@ -225,11 +225,13 @@ videoDialog?.addEventListener("close", () => {
     playHeroPreview();
 });
 
-document.querySelector(".christmas-catalog")?.addEventListener("play", (event) => {
-    event.currentTarget.querySelectorAll(".christmas-gallery__video").forEach((video) => {
-        if (video !== event.target && !video.paused) video.pause();
-    });
-}, true);
+document.querySelectorAll(".christmas-catalog, .film-catalog").forEach((catalog) => {
+    catalog.addEventListener("play", (event) => {
+        catalog.querySelectorAll(".christmas-gallery__video").forEach((video) => {
+            if (video !== event.target && !video.paused) video.pause();
+        });
+    }, true);
+});
 
 document.querySelectorAll(".christmas-gallery__player").forEach((player) => {
     const video = player.querySelector("video");

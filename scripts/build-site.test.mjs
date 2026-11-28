@@ -88,6 +88,31 @@ test("builds a self-contained static site with every current route", async () =>
     assert.match(photography, /<a class="listing-tile" href="\.\.\/photography\/craciun\/">[\s\S]*?src="\.\.\/images\/brand\/photography\/christmas\/christmas-160\.jpg"[\s\S]*?class="listing-tile__title">Atelierul lui Moș Crăciun<\/span>/);
     assert.doesNotMatch(photography, /class="coming-soon/);
 
+    for (const [slug, ids] of [
+        ["paste", ["DIRUHvSopHp", "DIbsIftISFG", "DIg2udaMb1y"]],
+        ["produse", ["DJZbSnjtHJC", "DQ9iZ8OjN8O"]],
+        ["couple", ["DNBaNe9t7Bm"]],
+        ["diverse-tematici", ["DeUH1OvoFE8"]],
+        ["weddings", ["DMA9rvKoJFa", "DfKnzpzRYV7", "DYr9MVHs0xo", "DMS2ZhVsopw"]]
+    ]) {
+        const category = await readFile(path.join(projectRoot, "dist", "photography", slug, "index.html"), "utf8");
+        assert.match(category, /class="landing-page film-catalog"/);
+        assert.equal((category.match(/<source src="\.\.\/\.\.\/videos\/reel-/g) ?? []).length, ids.length);
+        for (const id of ids) {
+            assert.ok(category.includes(`src="../../videos/reel-${id}.mp4"`));
+            assert.ok(category.includes(`poster="../../images/brand/photography/reels/${id}.jpg"`));
+            await assert.doesNotReject(readFile(path.join(projectRoot, "dist", "videos", `reel-${id}.mp4`)));
+            await assert.doesNotReject(readFile(path.join(projectRoot, "dist", "images", "brand", "photography", "reels", `${id}.jpg`)));
+        }
+        if (slug !== "weddings") {
+            assert.match(category, /class="landing-detail landing-detail--films"/);
+            assert.doesNotMatch(category, /class="landing-detail__image"/);
+            assert.match(category, /<h1>[^<]+<\/h1>/);
+            assert.ok(photography.includes(`href="../photography/${slug}/"`));
+            assert.ok(photography.includes(`href="../photography/${slug}/">${slug === "paste" ? "Paște 2025" : slug === "produse" ? "Produse" : slug === "couple" ? "Couple" : "Diverse tematici"}</a>`));
+        }
+    }
+
     const christmas = await readFile(path.join(projectRoot, "dist/photography/craciun/index.html"), "utf8");
     assert.match(christmas, /href="\.\.\/\.\.\/programari\/"/);
     assert.equal((christmas.match(/src="\.\.\/\.\.\/images\/brand\/photography\/christmas\/gallery-/g) || []).length, 6);
