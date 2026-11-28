@@ -250,11 +250,12 @@ img { display: block; max-width: 100%; }
 .footer-column a { font-size: 12px; }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 15px; padding-top: 20px; padding-bottom: 20px; border-top: 1px solid #ffffff26; }
 .video-dialog { width: min(850px, 90vw); padding: 30px; border: 1px solid #c49a64; background: #291d17; }
-.video-dialog--portrait { width: min(440px, 92vw); padding: clamp(10px, 2.5vw, 20px); }
+.video-dialog--portrait { width: min(440px, 92vw); max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); overflow-y: auto; padding: 42px 10px 10px; }
 .video-dialog::backdrop { background: #000c; }
 .video-dialog video { width: 100%; }
-.video-dialog--portrait video { display: block; max-height: 76vh; object-fit: contain; }
-.video-dialog__close { display: block; margin-left: auto; border: 0; color: white; background: transparent; font-size: 28px; }
+.video-dialog--portrait video { display: block; max-height: calc(100vh - 90px); max-height: calc(100dvh - 90px); object-fit: contain; }
+.video-dialog__close { position: absolute; top: 6px; right: 8px; display: grid; width: 28px; height: 28px; place-items: center; padding: 0 0 2px; border: 1px solid #c49a64a6; border-radius: 50%; color: #efd09d; background: #291d17; font-size: 20px; line-height: 1; }
+.video-dialog__close:hover { color: #fff8ef; background: #3a2920; }
 .reveal { opacity: 0; transform: translateY(15px); transition: opacity .5s, transform .5s; }
 .reveal.is-visible { opacity: 1; transform: none; }
 
